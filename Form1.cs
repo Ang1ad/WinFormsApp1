@@ -1,3 +1,6 @@
+using Microsoft.VisualBasic;
+using Microsoft.VisualBasic.Devices;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Linq;
 
@@ -15,12 +18,9 @@ namespace WinFormsApp1
 
         }
 
-        private void новоеToolStripMenuItem_Click(object sender, EventArgs e)
+        private void окноToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new Form2();
-            f.MdiParent = this;
-            f.Text = "Рисунок " + this.MdiChildren.Length.ToString();
-            f.Show();
+
         }
 
         private void новыйToolStripMenuItem_Click(object sender, EventArgs e)
@@ -29,66 +29,72 @@ namespace WinFormsApp1
             f.MdiParent = this;
             f.Text = "Рисунок " + this.MdiChildren.Length.ToString();
             f.Show();
-            if(f.DialogResult == DialogResult.OK)
+            if (!this.сохранитьКакToolStripMenuItem.Enabled)
             {
-                
+                this.сохранитьКакToolStripMenuItem.Enabled = true;
             }
         }
 
         private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-         
+            openFileDialog1.InitialDirectory = Environment.CurrentDirectory;
+            openFileDialog1.Filter = "JPG(*.JPG)|*.jpg";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Form f = new Form2();
+                ((Form2)f).open = true;
+                f.MdiParent = this;
+                f.Text = openFileDialog1.FileName;
+                BinaryFormatter bf = new BinaryFormatter();
+                Stream fileStream = new FileStream(ActiveMdiChild.Text, FileMode.Create, FileAccess.Write);
+                ((Form2)f).array = (List<Figure>)bf.Deserialize(fileStream);
+                f.Show();
+                if (!this.сохранитьКакToolStripMenuItem.Enabled)
+                {
+                    this.сохранитьКакToolStripMenuItem.Enabled = true;
+                }
+                fileStream.Dispose();
+            }
+
         }
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            SaveOptions saveOptions = new SaveOptions();
-            
+            Save((Form2)ActiveMdiChild);
         }
 
         private void сохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            SaveAs((Form2)ActiveMdiChild);
+        }
 
-            /*SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif";
-            sfd.Title = "Save an Image File";
-            sfd.ShowDialog();
+        public void Save(Form2 f)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            Stream fileStream = new FileStream(ActiveMdiChild.Text, FileMode.Create, FileAccess.Write);
+            bf.Serialize(fileStream, f.array);
+            f.open = true;
+            f.save = false;
+            fileStream.Close();
+        }
 
-            // If the file name is not an empty string open it for saving.
-            if (sfd.FileName != "")
+        public bool SaveAs(Form2 f)
+        {
+            saveFileDialog1.InitialDirectory = Environment.CurrentDirectory;
+            saveFileDialog1.Filter = "JPG(*.JPG)|*.jpg";
+            bool result = true;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                // Saves the Image via a FileStream created by the OpenFile method.
-                System.IO.FileStream fs =
-                    (System.IO.FileStream)sfd.OpenFile();
-                // Saves the Image in the appropriate ImageFormat based upon the
-                // File type selected in the dialog box.
-                // NOTE that the FilterIndex property is one-based.
-                switch (sfd.FilterIndex)
-                {
-                    case 1:
-                        this.сохранитьToolStripMenuItem.Image.Save(fs,
-                          System.Drawing.Imaging.ImageFormat.Jpeg);
-                        break;
-
-                    case 2:
-                        this.сохранитьToolStripMenuItem.Image.Save(fs,
-                          System.Drawing.Imaging.ImageFormat.Bmp);
-                        break;
-
-                    case 3:
-                        this.сохранитьToolStripMenuItem.Image.Save(fs,
-                          System.Drawing.Imaging.ImageFormat.Gif);
-                        break;
-                }
-
-                fs.Close();
-            }*/
-            /*BinaryFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None);
-            formatter.Serialize(stream, obj);
-            stream.Close();*/
+                BinaryFormatter bf = new BinaryFormatter();
+                Stream fileStream = new FileStream(ActiveMdiChild.Text, FileMode.Create, FileAccess.Write);
+                bf.Serialize(fileStream, f.array);
+                f.open = true;
+                f.save = false;
+                f.Text = saveFileDialog1.FileName;
+                fileStream.Close();
+                result = false;
+            }
+            return result;
         }
     }
 }

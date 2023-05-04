@@ -9,7 +9,7 @@ using System.IO;
 
 namespace WinFormsApp1
 {
-
+    [Serializable()]
     public abstract class Figure
     {
         public Point point1, point2;

@@ -10,12 +10,13 @@ using System.IO;
 
 namespace WinFormsApp1
 {
+    [Serializable()]
     public class MyRectangle : Figure
     {
         public MyRectangle(Point point1, Point point2) : base(point1, point2) { }
         public override void Draw(Graphics g)
         {
-            Pen pen = new Pen(Color.Blue, 1);
+            Pen pen = new Pen(Color.Black, 1);
             Rectangle rectangle = Rectangle.FromLTRB(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y), Math.Max(point1.X, point2.X), Math.Max(point1.Y, point2.Y));
             g.DrawRectangle(pen, rectangle);
         }

@@ -18,10 +18,14 @@ namespace WinFormsApp1
 {
     public partial class Form2 : Form
     {
-        int x1, y1, x2, y2;
-        bool draw = false;
-        Graphics g;
-        List<Figure> array = new List<Figure>();
+        public bool draw = false;
+        public bool save = false;
+        public bool open = false;
+        public List<Figure> array = new List<Figure>();
+        private Graphics g;
+        private MyRectangle rectangle;
+        private Point point1;
+        private Point point2;
         public Form2()
         {
             InitializeComponent();
@@ -31,28 +35,22 @@ namespace WinFormsApp1
         {
             if (e.Button == MouseButtons.Left)
             {
-                x1 = e.X;
-                y1 = e.Y;
                 draw = true;
-                
                 g = CreateGraphics();
+                point1 = new Point(e.X, e.Y);
+                point2 = new Point(e.X, e.Y);
+                rectangle = new MyRectangle(point1, point2);
             }
         }
 
         private void Form2_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (draw)
             {
-                if (draw == true)
-                {
-                    x2 = e.X; y2 = e.Y;
-                    Point point1 = new Point(x1, y1);
-                    Point point2 = new Point(x2, y2);
-                    MyRectangle rectangle = new MyRectangle(point1, point2);
-                    rectangle.DrawDash(g); 
-                    MyRectangle rectangle1 = new MyRectangle(point1, point2);
-                    rectangle1.Hide(g);
-                }
+                rectangle.Hide(g);
+                point2 = new Point(e.X, e.Y);
+                rectangle = new MyRectangle(point1, point2);
+                rectangle.DrawDash(g);
             }
         }
 
@@ -66,25 +64,51 @@ namespace WinFormsApp1
 
         private void Form2_MouseUp(object sender, MouseEventArgs e)
         {
-            if (draw == true)
+            if (draw && e.Button == MouseButtons.Left)
             {
-                Point point1 = new Point(x1, y1);
-                Point point2 = new Point(x2, y2);
-                MyRectangle rectangle1 = new MyRectangle(point1, point2);
-                rectangle1.Hide(g);
-                MyRectangle rect = new MyRectangle(point1, point2);
-                rect.Draw(g);
-                array.Add(rect);
+                rectangle = new MyRectangle(point1, point2);
+                rectangle.Draw(g);
+                array.Add(rectangle);
                 Invalidate();
+
+                if (!save)
+                {
+                    if (open) ((Form1)ParentForm).сохранитьToolStripMenuItem.Enabled = true;
+                    save = true;
+                }
             }
             draw = false;
         }
 
-        
-
         private void Form2_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void FormClose(object sender, FormClosingEventArgs e)
+        {
+            if (save)
+            {
+                DialogResult dr = MessageBox.Show("Сохранить изменения?", "", MessageBoxButtons.YesNoCancel);
+
+                if (dr == DialogResult.Yes)
+                {
+                    if (open) ((Form1)ParentForm).Save(this);
+                    else e.Cancel = ((Form1)ParentForm).SaveAs(this);
+                }
+                else if (dr == DialogResult.Cancel) e.Cancel = true;
+            }
+            if (((Form1)ParentForm).MdiChildren.Length == 1 && !e.Cancel)
+            {
+                ((Form1)ParentForm).сохранитьToolStripMenuItem.Enabled = false;
+                ((Form1)ParentForm).сохранитьКакToolStripMenuItem.Enabled = false;
+            }
+        }
+
+        private void FormActivate(object sender, EventArgs e)
+        {
+            ((Form1)ParentForm).сохранитьToolStripMenuItem.Enabled = open && save;
+            ((Form1)ParentForm).сохранитьКакToolStripMenuItem.Enabled = true;
         }
     }
 }
