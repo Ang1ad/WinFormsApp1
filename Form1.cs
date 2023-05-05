@@ -41,12 +41,12 @@ namespace WinFormsApp1
             openFileDialog1.Filter = "JPG(*.JPG)|*.jpg";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                BinaryFormatter bf = new BinaryFormatter();
+                Stream fileStream = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
                 Form f = new Form2();
                 ((Form2)f).open = true;
                 f.MdiParent = this;
                 f.Text = openFileDialog1.FileName;
-                BinaryFormatter bf = new BinaryFormatter();
-                Stream fileStream = new FileStream(ActiveMdiChild.Text, FileMode.Create, FileAccess.Write);
                 ((Form2)f).array = (List<Figure>)bf.Deserialize(fileStream);
                 f.Show();
                 if (!this.сохранитьКакToolStripMenuItem.Enabled)
@@ -71,7 +71,7 @@ namespace WinFormsApp1
         public void Save(Form2 f)
         {
             BinaryFormatter bf = new BinaryFormatter();
-            Stream fileStream = new FileStream(ActiveMdiChild.Text, FileMode.Create, FileAccess.Write);
+            Stream fileStream = new FileStream(ActiveMdiChild.Text, FileMode.Create, FileAccess.Write, FileShare.None);
             bf.Serialize(fileStream, f.array);
             f.open = true;
             f.save = false;
@@ -86,7 +86,7 @@ namespace WinFormsApp1
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 BinaryFormatter bf = new BinaryFormatter();
-                Stream fileStream = new FileStream(ActiveMdiChild.Text, FileMode.Create, FileAccess.Write);
+                Stream fileStream = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
                 bf.Serialize(fileStream, f.array);
                 f.open = true;
                 f.save = false;

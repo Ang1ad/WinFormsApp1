@@ -58,7 +58,7 @@ namespace WinFormsApp1
         {
             foreach (Figure f in array)
             {
-                f.Draw(g);
+                f.Draw(e.Graphics);
             }
         }
 
