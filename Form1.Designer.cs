@@ -35,6 +35,10 @@
             сохранитьToolStripMenuItem = new ToolStripMenuItem();
             сохранитьКакToolStripMenuItem = new ToolStripMenuItem();
             окноToolStripMenuItem = new ToolStripMenuItem();
+            параметрыToolStripMenuItem = new ToolStripMenuItem();
+            цветЛинииToolStripMenuItem = new ToolStripMenuItem();
+            толщинаЛинииToolStripMenuItem = new ToolStripMenuItem();
+            цветФонаToolStripMenuItem = new ToolStripMenuItem();
             saveFileDialog1 = new SaveFileDialog();
             openFileDialog1 = new OpenFileDialog();
             menuStrip1.SuspendLayout();
@@ -43,7 +47,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(18, 18);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { файлToolStripMenuItem, окноToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { файлToolStripMenuItem, окноToolStripMenuItem, параметрыToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.MdiWindowListItem = окноToolStripMenuItem;
             menuStrip1.Name = "menuStrip1";
@@ -57,6 +61,7 @@
             файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             файлToolStripMenuItem.Size = new Size(50, 21);
             файлToolStripMenuItem.Text = "Файл";
+            файлToolStripMenuItem.Click += файлToolStripMenuItem_Click;
             // 
             // новыйToolStripMenuItem
             // 
@@ -95,6 +100,35 @@
             окноToolStripMenuItem.Text = "Окно";
             окноToolStripMenuItem.Click += окноToolStripMenuItem_Click;
             // 
+            // параметрыToolStripMenuItem
+            // 
+            параметрыToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { цветЛинииToolStripMenuItem, толщинаЛинииToolStripMenuItem, цветФонаToolStripMenuItem });
+            параметрыToolStripMenuItem.Name = "параметрыToolStripMenuItem";
+            параметрыToolStripMenuItem.Size = new Size(89, 21);
+            параметрыToolStripMenuItem.Text = "Параметры";
+            параметрыToolStripMenuItem.Click += параметрыToolStripMenuItem_Click;
+            // 
+            // цветЛинииToolStripMenuItem
+            // 
+            цветЛинииToolStripMenuItem.Name = "цветЛинииToolStripMenuItem";
+            цветЛинииToolStripMenuItem.Size = new Size(198, 24);
+            цветЛинииToolStripMenuItem.Text = "Цвет линии";
+            цветЛинииToolStripMenuItem.Click += цветЛинииToolStripMenuItem_Click;
+            // 
+            // толщинаЛинииToolStripMenuItem
+            // 
+            толщинаЛинииToolStripMenuItem.Name = "толщинаЛинииToolStripMenuItem";
+            толщинаЛинииToolStripMenuItem.Size = new Size(198, 24);
+            толщинаЛинииToolStripMenuItem.Text = "Толщина линии";
+            толщинаЛинииToolStripMenuItem.Click += толщинаЛинииToolStripMenuItem_Click;
+            // 
+            // цветФонаToolStripMenuItem
+            // 
+            цветФонаToolStripMenuItem.Name = "цветФонаToolStripMenuItem";
+            цветФонаToolStripMenuItem.Size = new Size(198, 24);
+            цветФонаToolStripMenuItem.Text = "Цвет фона";
+            цветФонаToolStripMenuItem.Click += цветФонаToolStripMenuItem_Click;
+            // 
             // openFileDialog1
             // 
             openFileDialog1.FileName = "openFileDialog1";
@@ -128,5 +162,9 @@
         public ToolStripMenuItem сохранитьКакToolStripMenuItem;
         private SaveFileDialog saveFileDialog1;
         private OpenFileDialog openFileDialog1;
+        private ToolStripMenuItem параметрыToolStripMenuItem;
+        private ToolStripMenuItem цветЛинииToolStripMenuItem;
+        private ToolStripMenuItem толщинаЛинииToolStripMenuItem;
+        private ToolStripMenuItem цветФонаToolStripMenuItem;
     }
 }

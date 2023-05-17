@@ -13,11 +13,19 @@ namespace WinFormsApp1
     public abstract class Figure
     {
         public Point point1, point2;
+        public Color lineColor;
+        public Color fillColor;
+        public float width;
+        public bool isFill;
 
-        protected Figure(Point point1, Point point2)
+        protected Figure(Point point1, Point point2, Color lineColor, Color fillColor, float width, bool isFill)
         {
             this.point1 = point1;
             this.point2 = point2;
+            this.width = width;
+            this.lineColor = lineColor;
+            this.fillColor = fillColor;
+            this.isFill = isFill;
         }
 
         public abstract void Draw(Graphics g);

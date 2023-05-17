@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(784, 559);
-            this.Name = "Form2";
-            this.Text = "Form2";
-            this.Load += new System.EventHandler(this.Form2_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form2_Paint);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseMove);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseUp);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ButtonHighlight;
+            ClientSize = new Size(784, 559);
+            Name = "Form2";
+            Text = "Form2";
+            FormClosing += Form2_FormClosing;
+            Load += Form2_Load;
+            Paint += Form2_Paint;
+            MouseDown += Form2_MouseDown;
+            MouseMove += Form2_MouseMove;
+            MouseUp += Form2_MouseUp;
+            ResumeLayout(false);
         }
 
         #endregion

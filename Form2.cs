@@ -39,7 +39,11 @@ namespace WinFormsApp1
                 g = CreateGraphics();
                 point1 = new Point(e.X, e.Y);
                 point2 = new Point(e.X, e.Y);
-                rectangle = new MyRectangle(point1, point2);
+                rectangle = new MyRectangle(point1, point2,
+                    lineColor: ((Form1)ParentForm).baseLineColor,
+                    fillColor: ((Form1)ParentForm).baseFillColor,
+                    width: ((Form1)ParentForm).baseLineWidth,
+                    isFill: ((Form1)ParentForm).baseIsFill);
             }
         }
 
@@ -49,7 +53,11 @@ namespace WinFormsApp1
             {
                 rectangle.Hide(g);
                 point2 = new Point(e.X, e.Y);
-                rectangle = new MyRectangle(point1, point2);
+                rectangle = new MyRectangle(point1, point2,
+                    lineColor: ((Form1)ParentForm).baseLineColor,
+                    fillColor: ((Form1)ParentForm).baseFillColor,
+                    width: ((Form1)ParentForm).baseLineWidth,
+                    isFill: ((Form1)ParentForm).baseIsFill);
                 rectangle.DrawDash(g);
             }
         }
@@ -58,7 +66,7 @@ namespace WinFormsApp1
         {
             foreach (Figure f in array)
             {
-                f.Draw(g);
+                f.Draw(e.Graphics);
             }
         }
 
@@ -66,7 +74,11 @@ namespace WinFormsApp1
         {
             if (draw && e.Button == MouseButtons.Left)
             {
-                rectangle = new MyRectangle(point1, point2);
+                rectangle = new MyRectangle(point1, point2,
+                    lineColor: ((Form1)ParentForm).baseLineColor, 
+                    fillColor: ((Form1)ParentForm).baseFillColor, 
+                    width: ((Form1)ParentForm).baseLineWidth, 
+                    isFill: ((Form1)ParentForm).baseIsFill);
                 rectangle.Draw(g);
                 array.Add(rectangle);
                 Invalidate();
@@ -85,11 +97,17 @@ namespace WinFormsApp1
 
         }
 
-        private void FormClose(object sender, FormClosingEventArgs e)
+        private void FormActivate(object sender, EventArgs e)
+        {
+            ((Form1)ParentForm).сохранитьToolStripMenuItem.Enabled = open && save;
+            ((Form1)ParentForm).сохранитьКакToolStripMenuItem.Enabled = true;
+        }
+
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (save)
             {
-                DialogResult dr = MessageBox.Show("Сохранить изменения?", "", MessageBoxButtons.YesNoCancel);
+                DialogResult dr = MessageBox.Show("Сохранить изменения?", "Рисунок", MessageBoxButtons.YesNoCancel);
 
                 if (dr == DialogResult.Yes)
                 {
@@ -103,12 +121,6 @@ namespace WinFormsApp1
                 ((Form1)ParentForm).сохранитьToolStripMenuItem.Enabled = false;
                 ((Form1)ParentForm).сохранитьКакToolStripMenuItem.Enabled = false;
             }
-        }
-
-        private void FormActivate(object sender, EventArgs e)
-        {
-            ((Form1)ParentForm).сохранитьToolStripMenuItem.Enabled = open && save;
-            ((Form1)ParentForm).сохранитьКакToolStripMenuItem.Enabled = true;
         }
     }
 }
