@@ -13,6 +13,11 @@ namespace WinFormsApp1
             InitializeComponent();
         }
 
+        public Color baseLineColor = Color.Black;
+        public Color baseFillColor = Color.White;
+        public int baseThickness = 1;
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -95,6 +100,37 @@ namespace WinFormsApp1
                 result = false;
             }
             return result;
+        }
+
+        private void толщинаЛинииToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ThicknessDialog thicknessDialog = new ThicknessDialog();
+            DialogResult result = thicknessDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+
+            }
+        }
+
+        private void цветЛинииToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changeColor(ref baseLineColor);
+        }
+
+        private void цветЗаливкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            changeColor(ref baseFillColor);
+        }
+
+        private void changeColor(ref Color color)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            colorDialog.Color = color;
+            DialogResult result = colorDialog.ShowDialog();
+            if (result == DialogResult.OK) 
+            {
+                color = colorDialog.Color;  
+            }
         }
     }
 }

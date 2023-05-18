@@ -26,6 +26,7 @@ namespace WinFormsApp1
         private MyRectangle rectangle;
         private Point point1;
         private Point point2;
+
         public Form2()
         {
             InitializeComponent();
@@ -39,7 +40,13 @@ namespace WinFormsApp1
                 g = CreateGraphics();
                 point1 = new Point(e.X, e.Y);
                 point2 = new Point(e.X, e.Y);
-                rectangle = new MyRectangle(point1, point2);
+
+
+
+                rectangle = new MyRectangle(point1, point2,
+                    lineColor: ((Form1)ParentForm).baseLineColor,
+                    fillColor: ((Form1)ParentForm).baseFillColor,
+                    thickness: ((Form1)ParentForm).baseThickness);
             }
         }
 
@@ -49,7 +56,10 @@ namespace WinFormsApp1
             {
                 rectangle.Hide(g);
                 point2 = new Point(e.X, e.Y);
-                rectangle = new MyRectangle(point1, point2);
+                rectangle = new MyRectangle(point1, point2,
+                    lineColor: ((Form1)ParentForm).baseLineColor,
+                    fillColor: ((Form1)ParentForm).baseFillColor,
+                    thickness: ((Form1)ParentForm).baseThickness);
                 rectangle.DrawDash(g);
             }
         }
@@ -66,7 +76,10 @@ namespace WinFormsApp1
         {
             if (draw && e.Button == MouseButtons.Left)
             {
-                rectangle = new MyRectangle(point1, point2);
+                rectangle = new MyRectangle(point1, point2,
+                    lineColor: ((Form1)ParentForm).baseLineColor,
+                    fillColor: ((Form1)ParentForm).baseFillColor,
+                    thickness: ((Form1)ParentForm).baseThickness);
                 rectangle.Draw(g);
                 array.Add(rectangle);
                 Invalidate();
