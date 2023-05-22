@@ -13,9 +13,10 @@ namespace WinFormsApp1
             InitializeComponent();
         }
 
-        public Color baseLineColor = Color.Black;
-        public Color baseFillColor = Color.White;
-        public int baseThickness = 1;
+        public Color paramLineColor = Color.Black;
+        public Color paramFillColor = Color.White;
+        public int paramThickness = 1;
+        public bool paramIsFill = false;
 
 
         private void Form1_Load(object sender, EventArgs e)
@@ -105,21 +106,28 @@ namespace WinFormsApp1
         private void толщинаЛинииToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ThicknessDialog thicknessDialog = new ThicknessDialog();
-            DialogResult result = thicknessDialog.ShowDialog();
+            thicknessDialog.comboBox1.Text = paramThickness.ToString();
+            DialogResult result = thicknessDialog.ShowDialog(this);
             if (result == DialogResult.OK)
             {
-
+                paramThickness = Convert.ToInt32(thicknessDialog.comboBox1.SelectedItem);
+                thicknessDialog.comboBox1.Text = thicknessDialog.comboBox1.SelectedItem.ToString();
+                thicknessDialog.Close();
+            }
+            else if (result == DialogResult.Cancel)
+            {
+                thicknessDialog.Close();
             }
         }
 
         private void цветЛинииToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            changeColor(ref baseLineColor);
+            changeColor(ref paramLineColor);
         }
 
         private void цветЗаливкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            changeColor(ref baseFillColor);
+            changeColor(ref paramFillColor);
         }
 
         private void changeColor(ref Color color)
@@ -127,10 +135,24 @@ namespace WinFormsApp1
             ColorDialog colorDialog = new ColorDialog();
             colorDialog.Color = color;
             DialogResult result = colorDialog.ShowDialog();
-            if (result == DialogResult.OK) 
+            if (result == DialogResult.OK)
             {
-                color = colorDialog.Color;  
+                color = colorDialog.Color;
             }
+        }
+
+        private void выклToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            выклToolStripMenuItem.Checked = true;
+            вклToolStripMenuItem.Checked = false;
+            paramIsFill = выклToolStripMenuItem.Checked;
+        }
+
+        private void вклToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            вклToolStripMenuItem.Checked = true;
+            выклToolStripMenuItem.Checked = false;
+            paramIsFill = вклToolStripMenuItem.Checked;
         }
     }
 }

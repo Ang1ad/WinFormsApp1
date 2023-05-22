@@ -39,6 +39,9 @@
             цветЛинииToolStripMenuItem = new ToolStripMenuItem();
             цветЗаливкиToolStripMenuItem = new ToolStripMenuItem();
             толщинаЛинииToolStripMenuItem = new ToolStripMenuItem();
+            режимЗаливкиToolStripMenuItem = new ToolStripMenuItem();
+            вклToolStripMenuItem = new ToolStripMenuItem();
+            выклToolStripMenuItem = new ToolStripMenuItem();
             saveFileDialog1 = new SaveFileDialog();
             openFileDialog1 = new OpenFileDialog();
             menuStrip1.SuspendLayout();
@@ -101,7 +104,7 @@
             // 
             // параметрыToolStripMenuItem
             // 
-            параметрыToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { цветЛинииToolStripMenuItem, цветЗаливкиToolStripMenuItem, толщинаЛинииToolStripMenuItem });
+            параметрыToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { цветЛинииToolStripMenuItem, цветЗаливкиToolStripMenuItem, толщинаЛинииToolStripMenuItem, режимЗаливкиToolStripMenuItem });
             параметрыToolStripMenuItem.Name = "параметрыToolStripMenuItem";
             параметрыToolStripMenuItem.Size = new Size(89, 21);
             параметрыToolStripMenuItem.Text = "Параметры";
@@ -126,6 +129,29 @@
             толщинаЛинииToolStripMenuItem.Size = new Size(198, 24);
             толщинаЛинииToolStripMenuItem.Text = "Толщина линии";
             толщинаЛинииToolStripMenuItem.Click += толщинаЛинииToolStripMenuItem_Click;
+            // 
+            // режимЗаливкиToolStripMenuItem
+            // 
+            режимЗаливкиToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { вклToolStripMenuItem, выклToolStripMenuItem });
+            режимЗаливкиToolStripMenuItem.Name = "режимЗаливкиToolStripMenuItem";
+            режимЗаливкиToolStripMenuItem.Size = new Size(198, 24);
+            режимЗаливкиToolStripMenuItem.Text = "Режим заливки";
+            // 
+            // вклToolStripMenuItem
+            // 
+            вклToolStripMenuItem.Name = "вклToolStripMenuItem";
+            вклToolStripMenuItem.Size = new Size(198, 24);
+            вклToolStripMenuItem.Text = "Вкл.";
+            вклToolStripMenuItem.Click += вклToolStripMenuItem_Click;
+            // 
+            // выклToolStripMenuItem
+            // 
+            выклToolStripMenuItem.Checked = true;
+            выклToolStripMenuItem.CheckState = CheckState.Checked;
+            выклToolStripMenuItem.Name = "выклToolStripMenuItem";
+            выклToolStripMenuItem.Size = new Size(198, 24);
+            выклToolStripMenuItem.Text = "Выкл.";
+            выклToolStripMenuItem.Click += выклToolStripMenuItem_Click;
             // 
             // openFileDialog1
             // 
@@ -164,5 +190,8 @@
         private ToolStripMenuItem цветЛинииToolStripMenuItem;
         private ToolStripMenuItem цветЗаливкиToolStripMenuItem;
         private ToolStripMenuItem толщинаЛинииToolStripMenuItem;
+        private ToolStripMenuItem режимЗаливкиToolStripMenuItem;
+        public ToolStripMenuItem вклToolStripMenuItem;
+        public ToolStripMenuItem выклToolStripMenuItem;
     }
 }

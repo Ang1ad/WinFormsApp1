@@ -44,9 +44,10 @@ namespace WinFormsApp1
 
 
                 rectangle = new MyRectangle(point1, point2,
-                    lineColor: ((Form1)ParentForm).baseLineColor,
-                    fillColor: ((Form1)ParentForm).baseFillColor,
-                    thickness: ((Form1)ParentForm).baseThickness);
+                    lineColor: ((Form1)ParentForm).paramLineColor,
+                    fillColor: ((Form1)ParentForm).paramFillColor,
+                    thickness: ((Form1)ParentForm).paramThickness,
+                    isFill:    ((Form1)ParentForm).paramIsFill);
             }
         }
 
@@ -57,9 +58,10 @@ namespace WinFormsApp1
                 rectangle.Hide(g);
                 point2 = new Point(e.X, e.Y);
                 rectangle = new MyRectangle(point1, point2,
-                    lineColor: ((Form1)ParentForm).baseLineColor,
-                    fillColor: ((Form1)ParentForm).baseFillColor,
-                    thickness: ((Form1)ParentForm).baseThickness);
+                    lineColor: ((Form1)ParentForm).paramLineColor,
+                    fillColor: ((Form1)ParentForm).paramFillColor,
+                    thickness: ((Form1)ParentForm).paramThickness,
+                    isFill:    ((Form1)ParentForm).paramIsFill);
                 rectangle.DrawDash(g);
             }
         }
@@ -77,9 +79,10 @@ namespace WinFormsApp1
             if (draw && e.Button == MouseButtons.Left)
             {
                 rectangle = new MyRectangle(point1, point2,
-                    lineColor: ((Form1)ParentForm).baseLineColor,
-                    fillColor: ((Form1)ParentForm).baseFillColor,
-                    thickness: ((Form1)ParentForm).baseThickness);
+                    lineColor: ((Form1)ParentForm).paramLineColor,
+                    fillColor: ((Form1)ParentForm).paramFillColor, 
+                    thickness: ((Form1)ParentForm).paramThickness, 
+                    isFill:    ((Form1)ParentForm).paramIsFill);
                 rectangle.Draw(g);
                 array.Add(rectangle);
                 Invalidate();

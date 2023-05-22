@@ -16,5 +16,20 @@ namespace WinFormsApp1
         {
             InitializeComponent();
         }
+
+        private void OK_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Cancel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

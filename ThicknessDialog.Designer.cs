@@ -29,22 +29,51 @@
         private void InitializeComponent()
         {
             comboBox1 = new ComboBox();
+            OK = new Button();
+            Cancel = new Button();
             SuspendLayout();
             // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(12, 12);
+            comboBox1.Items.AddRange(new object[] { "1", "2", "5", "8", "10", "12", "15" });
+            comboBox1.Location = new Point(35, 12);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(134, 25);
             comboBox1.TabIndex = 0;
+            comboBox1.Text = "1";
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
+            // OK
+            // 
+            OK.DialogResult = DialogResult.OK;
+            OK.Location = new Point(12, 44);
+            OK.Name = "OK";
+            OK.Size = new Size(83, 25);
+            OK.TabIndex = 1;
+            OK.Text = "Принять";
+            OK.UseVisualStyleBackColor = true;
+            OK.Click += OK_Click;
+            // 
+            // Cancel
+            // 
+            Cancel.DialogResult = DialogResult.Cancel;
+            Cancel.Location = new Point(109, 44);
+            Cancel.Name = "Cancel";
+            Cancel.Size = new Size(83, 25);
+            Cancel.TabIndex = 2;
+            Cancel.Text = "Назад";
+            Cancel.UseVisualStyleBackColor = true;
+            Cancel.Click += Cancel_Click;
             // 
             // ThicknessDialog
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(204, 159);
+            ClientSize = new Size(204, 81);
             ControlBox = false;
+            Controls.Add(Cancel);
+            Controls.Add(OK);
             Controls.Add(comboBox1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
@@ -57,6 +86,8 @@
 
         #endregion
 
-        private ComboBox comboBox1;
+        public ComboBox comboBox1;
+        private Button OK;
+        private Button Cancel;
     }
 }
