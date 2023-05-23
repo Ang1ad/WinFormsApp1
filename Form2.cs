@@ -27,9 +27,10 @@ namespace WinFormsApp1
         private Point point1;
         private Point point2;
 
-        public Form2()
+        public Form2(Size size)
         {
             InitializeComponent();
+
         }
 
         private void Form2_MouseDown(object sender, MouseEventArgs e)
