@@ -145,7 +145,7 @@ namespace WinFormsApp1
         {
             выклToolStripMenuItem.Checked = true;
             вклToolStripMenuItem.Checked = false;
-            paramIsFill = выклToolStripMenuItem.Checked;
+            paramIsFill = вклToolStripMenuItem.Checked;
         }
 
         private void вклToolStripMenuItem_Click(object sender, EventArgs e)
