@@ -1,5 +1,6 @@
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.Devices;
+using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Linq;
@@ -15,8 +16,10 @@ namespace WinFormsApp1
 
         public Color paramLineColor = Color.Black;
         public Color paramFillColor = Color.White;
+        public Color paramDashColor = Color.Gray;
         public int paramThickness = 1;
         public bool paramIsFill = false;
+
 
 
         private void Form1_Load(object sender, EventArgs e)
@@ -31,13 +34,19 @@ namespace WinFormsApp1
 
         private void новыйToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new Form2();
-            f.MdiParent = this;
-            f.Text = "Рисунок " + this.MdiChildren.Length.ToString();
-            f.Show();
-            if (!this.сохранитьКакToolStripMenuItem.Enabled)
+            FileSize fileSize = new FileSize();
+            DialogResult result = fileSize.ShowDialog(this);
+            if (result == DialogResult.OK) 
             {
-                this.сохранитьКакToolStripMenuItem.Enabled = true;
+                Form f = new Form2(fileSize.size);
+                f.MdiParent = this;
+                f.Text = "Рисунок " + this.MdiChildren.Length.ToString();
+                if (!this.сохранитьКакToolStripMenuItem.Enabled)
+                {
+                    this.сохранитьКакToolStripMenuItem.Enabled = true;
+                }
+                fileSize.Close();
+                f.Show();
             }
         }
 
@@ -49,11 +58,12 @@ namespace WinFormsApp1
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 Stream fileStream = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                Form f = new Form2();
+                SaveData data = (SaveData)bf.Deserialize(fileStream);
+                Form f = new Form2(data.size);
                 ((Form2)f).open = true;
                 f.MdiParent = this;
                 f.Text = openFileDialog1.FileName;
-                ((Form2)f).array = (List<Figure>)bf.Deserialize(fileStream);
+                ((Form2)f).workSpace.array = data.arrayOfFigures;
                 f.Show();
                 if (!this.сохранитьКакToolStripMenuItem.Enabled)
                 {
@@ -78,7 +88,8 @@ namespace WinFormsApp1
         {
             BinaryFormatter bf = new BinaryFormatter();
             Stream fileStream = new FileStream(ActiveMdiChild.Text, FileMode.Create, FileAccess.Write, FileShare.None);
-            bf.Serialize(fileStream, f.array);
+            SaveData saveData = new SaveData(f.workSpace.Size, f.workSpace.array);
+            bf.Serialize(fileStream, saveData);
             f.open = true;
             f.save = false;
             fileStream.Close();
@@ -93,7 +104,8 @@ namespace WinFormsApp1
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 Stream fileStream = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
-                bf.Serialize(fileStream, f.array);
+                SaveData saveData = new SaveData(f.workSpace.Size, f.workSpace.array);
+                bf.Serialize(fileStream, saveData);
                 f.open = true;
                 f.save = false;
                 f.Text = saveFileDialog1.FileName;
@@ -154,5 +166,7 @@ namespace WinFormsApp1
             выклToolStripMenuItem.Checked = false;
             paramIsFill = вклToolStripMenuItem.Checked;
         }
+
+        
     }
 }

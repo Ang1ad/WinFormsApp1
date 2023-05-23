@@ -18,83 +18,19 @@ namespace WinFormsApp1
 {
     public partial class Form2 : Form
     {
-        public bool draw = false;
         public bool save = false;
         public bool open = false;
-        public List<Figure> array = new List<Figure>();
-        private Graphics g;
-        private MyRectangle rectangle;
-        private Point point1;
-        private Point point2;
 
+        public MyRectangle rectangle;
+        public WorkSpace workSpace;
         public Form2(Size size)
         {
             InitializeComponent();
-
-        }
-
-        private void Form2_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                draw = true;
-                g = CreateGraphics();
-                point1 = new Point(e.X, e.Y);
-                point2 = new Point(e.X, e.Y);
-
-
-
-                rectangle = new MyRectangle(point1, point2,
-                    lineColor: ((Form1)ParentForm).paramLineColor,
-                    fillColor: ((Form1)ParentForm).paramFillColor,
-                    thickness: ((Form1)ParentForm).paramThickness,
-                    isFill:    ((Form1)ParentForm).paramIsFill);
-            }
-        }
-
-        private void Form2_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (draw)
-            {
-                rectangle.Hide(g);
-                point2 = new Point(e.X, e.Y);
-                rectangle = new MyRectangle(point1, point2,
-                    lineColor: ((Form1)ParentForm).paramLineColor,
-                    fillColor: ((Form1)ParentForm).paramFillColor,
-                    thickness: ((Form1)ParentForm).paramThickness,
-                    isFill:    ((Form1)ParentForm).paramIsFill);
-                rectangle.DrawDash(g);
-            }
-        }
-
-        private void Form2_Paint(object sender, PaintEventArgs e)
-        {
-            foreach (Figure f in array)
-            {
-                f.Draw(e.Graphics);
-            }
-        }
-
-        private void Form2_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (draw && e.Button == MouseButtons.Left)
-            {
-                rectangle = new MyRectangle(point1, point2,
-                    lineColor: ((Form1)ParentForm).paramLineColor,
-                    fillColor: ((Form1)ParentForm).paramFillColor, 
-                    thickness: ((Form1)ParentForm).paramThickness, 
-                    isFill:    ((Form1)ParentForm).paramIsFill);
-                rectangle.Draw(g);
-                array.Add(rectangle);
-                Invalidate();
-
-                if (!save)
-                {
-                    if (open) ((Form1)ParentForm).сохранитьToolStripMenuItem.Enabled = true;
-                    save = true;
-                }
-            }
-            draw = false;
+            ClientSize = size;
+            AutoScrollMinSize = size;
+            workSpace = new WorkSpace(size);
+            Controls.Clear();
+            Controls.Add(workSpace);
         }
 
         private void Form2_Load(object sender, EventArgs e)

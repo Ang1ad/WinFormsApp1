@@ -13,16 +13,17 @@ namespace WinFormsApp1
     public abstract class Figure
     {
         public Point point1, point2;
-        public Color lineColor, fillColor;
+        public Color lineColor, fillColor, dashColor;
         public int thickness;
         public bool isFill;
 
-        protected Figure(Point point1, Point point2, Color lineColor, Color fillColor, int thickness, bool isFill)
+        protected Figure(Point point1, Point point2, Color lineColor, Color fillColor, Color dashColor, int thickness, bool isFill)
         {
             this.point1 = point1;
             this.point2 = point2;
             this.lineColor = lineColor;
             this.fillColor = fillColor;
+            this.dashColor = dashColor;
             this.thickness = thickness;
             this.isFill = isFill;
         }
@@ -32,6 +33,8 @@ namespace WinFormsApp1
         public abstract void DrawDash(Graphics g);
 
         public abstract void Hide(Graphics g);
+
+        public abstract bool inBorder(Size size);
     }
 
 }
