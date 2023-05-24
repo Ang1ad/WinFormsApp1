@@ -40,9 +40,6 @@ namespace WinFormsApp1
                 g = CreateGraphics();
                 point1 = new Point(e.X, e.Y);
                 point2 = new Point(e.X, e.Y);
-
-
-
                 rectangle = new MyRectangle(point1, point2,
                     lineColor: ((Form1)ParentForm).paramLineColor,
                     fillColor: ((Form1)ParentForm).paramFillColor,
