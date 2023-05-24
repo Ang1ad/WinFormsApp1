@@ -35,7 +35,7 @@
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            BackColor = SystemColors.ButtonHighlight;
+            BackColor = SystemColors.ControlDark;
             ClientSize = new Size(784, 559);
             Name = "Form2";
             Text = "Form2";

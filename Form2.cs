@@ -18,11 +18,7 @@ namespace WinFormsApp1
 {
     public partial class Form2 : Form
     {
-        public bool save = false;
-        public bool open = false;
 
-        public MyRectangle rectangle;
-        public WorkSpace workSpace;
         public Form2(Size size)
         {
             InitializeComponent();
@@ -32,6 +28,12 @@ namespace WinFormsApp1
             Controls.Clear();
             Controls.Add(workSpace);
         }
+
+        public bool save = false;
+        public bool open = false;
+
+        public MyRectangle rectangle;
+        public WorkSpace workSpace;
 
         private void Form2_Load(object sender, EventArgs e)
         {
