@@ -34,6 +34,12 @@ namespace WinFormsApp1
 
         public MyRectangle rectangle;
         public WorkSpace workSpace;
+            }
+            draw = false;
+        }
+            }
+            draw = false;
+        }
 
         private void Form2_Load(object sender, EventArgs e)
         {
