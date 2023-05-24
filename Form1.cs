@@ -41,6 +41,8 @@ namespace WinFormsApp1
             }
         }
 
+        //Class1 class = new Class1();
+
         private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.InitialDirectory = Environment.CurrentDirectory;
