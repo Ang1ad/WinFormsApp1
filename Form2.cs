@@ -29,17 +29,12 @@ namespace WinFormsApp1
             Controls.Add(workSpace);
         }
 
+
         public bool save = false;
         public bool open = false;
 
         public MyRectangle rectangle;
         public WorkSpace workSpace;
-            }
-            draw = false;
-        }
-            }
-            draw = false;
-        }
 
         private void Form2_Load(object sender, EventArgs e)
         {
