@@ -16,7 +16,7 @@ namespace WinFormsApp1
         public Color lineColor, fillColor, dashColor;
         public int thickness;
         public bool isFill;
-        public Point[] points = new Point[256];
+        protected List<Point> points = new();
 
         protected Figure(Point point1, Point point2, Color lineColor, Color fillColor, Color dashColor, int thickness, bool isFill)
         {
@@ -33,14 +33,6 @@ namespace WinFormsApp1
         {
             this.point1 = point1;
             this.point2 = point2;
-            this.lineColor = lineColor;
-            this.dashColor = dashColor;
-            this.thickness = thickness;
-        }
-
-        protected Figure(Point[] points, Color lineColor, Color dashColor, int thickness)
-        {
-            this.points = points;
             this.lineColor = lineColor;
             this.dashColor = dashColor;
             this.thickness = thickness;

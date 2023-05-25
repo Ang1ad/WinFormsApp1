@@ -36,6 +36,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             DoubleBuffered = true;
             Name = "WorkSpace";
+            Load += WorkSpace_Load;
             Paint += WorkSpace_Paint;
             MouseDown += WorkSpace_MouseDown;
             MouseEnter += WorkSpace_MouseEnter;

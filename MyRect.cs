@@ -14,7 +14,10 @@ namespace WinFormsApp1
     public class MyRectangle : Figure
     {
         public MyRectangle(Point point1, Point point2, Color lineColor, Color fillColor, Color dashColor, int thickness, bool isFill) : 
-            base(point1, point2, lineColor, fillColor, dashColor, thickness, isFill) { }
+            base(point1, point2, lineColor, fillColor, dashColor, thickness, isFill) 
+        {
+            
+        }
         public override void Draw(Graphics g)
         {
             Pen pen = new Pen(lineColor, thickness);

@@ -21,6 +21,8 @@ namespace WinFormsApp1
             Size = size;
         }
 
+        public BufferedGraphics buffer;
+        public BufferedGraphicsContext bufferContext;
         public bool draw = false;
         public List<Figure> array = new List<Figure>();
         public Graphics g;
@@ -32,7 +34,7 @@ namespace WinFormsApp1
             if (e.Button == MouseButtons.Left)
             {
                 draw = true;
-                g = CreateGraphics();
+                //g = CreateGraphics();
                 point1 = new Point(e.X, e.Y);
                 point2 = new Point(e.X, e.Y);
                 switch (((Form1)ParentForm.ParentForm).figureNumber)
@@ -60,10 +62,7 @@ namespace WinFormsApp1
                     thickness: ((Form1)ParentForm.ParentForm).paramThickness);
                         break;
                     case 4:
-                        Point[] points = new Point[256];
-                        points[0].X = point1.X;
-                        points[0].Y = point1.Y;
-                        ((Form1)ParentForm.ParentForm).figure = new Curve(points,
+                        ((Form1)ParentForm.ParentForm).figure = new Curve(point1, point2,
                     lineColor: ((Form1)ParentForm.ParentForm).paramLineColor,
                     dashColor: ((Form1)ParentForm.ParentForm).paramDashColor,
                     thickness: ((Form1)ParentForm.ParentForm).paramThickness);
@@ -76,7 +75,13 @@ namespace WinFormsApp1
         {
             if (draw)
             {
-                ((Form1)ParentForm.ParentForm).figure.Hide(g);
+                //((Form1)ParentForm.ParentForm).figure.Hide(g);
+                buffer.Render(g);
+                buffer.Graphics.FillRectangle(new SolidBrush(Color.White), DisplayRectangle);
+                foreach (Figure f in array)
+                {
+                    f.Draw(buffer.Graphics);
+                }
                 point2 = new Point(e.X, e.Y);
                 if (!(point2.X > 0 && point2.X < Size.Width) ||
                     !(point2.Y > 0 && point2.Y < Size.Height))
@@ -84,7 +89,7 @@ namespace WinFormsApp1
                     ((Form1)ParentForm.ParentForm).figure.dashColor = Color.Red;
                     ((Form1)ParentForm.ParentForm).figure.point2 = new Point(e.X, e.Y);
                 }
-                ((Form1)ParentForm.ParentForm).figure.DrawDash(g);
+                ((Form1)ParentForm.ParentForm).figure.DrawDash(buffer.Graphics);
             }
         }
 
@@ -100,10 +105,10 @@ namespace WinFormsApp1
         {
             if (draw && e.Button == MouseButtons.Left)
             {
-                
                 if (((Form1)ParentForm.ParentForm).figure.inBorder(Size))
                 {
-                    ((Form1)ParentForm.ParentForm).figure.Draw(g);
+                    buffer.Render(g);
+                    ((Form1)ParentForm.ParentForm).figure.Draw(buffer.Graphics);
                     array.Add(((Form1)ParentForm.ParentForm).figure);
 
                     if (!((Form2)ParentForm).save)
@@ -117,12 +122,12 @@ namespace WinFormsApp1
                 }
                 else
                 {
-                    ((Form1)ParentForm.ParentForm).figure.Hide(g);
+                    buffer.Render(g);
+                    //((Form1)ParentForm.ParentForm).figure.Hide(g);
                 }
-
+                draw = false;
+                Invalidate();
             }
-            draw = false;
-            Invalidate();
         }
 
         private void WorkSpace_MouseEnter(object sender, EventArgs e)
@@ -133,6 +138,14 @@ namespace WinFormsApp1
         private void WorkSpace_MouseLeave(object sender, EventArgs e)
         {
 
+        }
+
+        private void WorkSpace_Load(object sender, EventArgs e)
+        {
+            bufferContext = new BufferedGraphicsContext();
+            bufferContext.MaximumBuffer = Size;
+            g = CreateGraphics();
+            buffer = bufferContext.Allocate(g, DisplayRectangle);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace WinFormsApp1
 {
     public partial class Form1 : Form
     {
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -177,6 +177,7 @@ namespace WinFormsApp1
             криваяToolStripMenuItem.Checked = false;
             эллипсToolStripMenuItem.Checked = false;
             прямаяToolStripMenuItem.Checked = false;
+            figureNumber = 1;
         }
 
         private void эллипсToolStripMenuItem_Click(object sender, EventArgs e)
@@ -185,6 +186,7 @@ namespace WinFormsApp1
             прямоугольникToolStripMenuItem.Checked = false;
             криваяToolStripMenuItem.Checked = false;
             прямаяToolStripMenuItem.Checked = false;
+            figureNumber = 2;
         }
 
         private void прямаяToolStripMenuItem_Click(object sender, EventArgs e)
@@ -193,6 +195,10 @@ namespace WinFormsApp1
             прямоугольникToolStripMenuItem.Checked = false;
             эллипсToolStripMenuItem.Checked = false;
             криваяToolStripMenuItem.Checked = false;
+            цветЗаливкиToolStripMenuItem.Enabled = false;
+            режимЗаливкиToolStripMenuItem.Enabled = false;
+            режимЗаливкиToolStripMenuItem.Checked = false;
+            figureNumber = 3;
         }
 
         private void криваяToolStripMenuItem_Click(object sender, EventArgs e)
@@ -201,26 +207,9 @@ namespace WinFormsApp1
             прямоугольникToolStripMenuItem.Checked = false;
             эллипсToolStripMenuItem.Checked = false;
             прямаяToolStripMenuItem.Checked = false;
-        }
-
-        private void ChooseRectangle()
-        {
-            figureNumber = Convert.ToInt32(1);
-            //figure =
-        }
-
-        private void ChooseEllipse()
-        {
-            figureNumber = 2;
-        }
-
-        private void ChooseLine()
-        {
-            figureNumber = 3;
-        }
-
-        private void ChooseCurve()
-        {
+            цветЗаливкиToolStripMenuItem.Enabled = false;
+            режимЗаливкиToolStripMenuItem.Enabled = false;
+            режимЗаливкиToolStripMenuItem.Checked = false;
             figureNumber = 4;
         }
     }
