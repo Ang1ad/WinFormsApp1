@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WinFormsApp1
 {
+    [Serializable()]
     public class Ellipse : MyRectangle
     {
         public Ellipse(Point point1, Point point2, Color lineColor, Color fillColor, Color dashColor, int thickness, bool isFill) :

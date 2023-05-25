@@ -37,6 +37,7 @@
             AutoScroll = true;
             BackColor = SystemColors.ControlDark;
             ClientSize = new Size(784, 559);
+            DoubleBuffered = true;
             Name = "Form2";
             Text = "Form2";
             Load += Form2_Load;

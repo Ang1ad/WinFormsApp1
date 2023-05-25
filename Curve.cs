@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WinFormsApp1
 {
+    [Serializable()]
     public class Curve : Figure
     {
         public Curve (Point point1, Point point2, Color lineColor, Color dashColor, int thickness) :
