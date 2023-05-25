@@ -35,12 +35,40 @@ namespace WinFormsApp1
                 g = CreateGraphics();
                 point1 = new Point(e.X, e.Y);
                 point2 = new Point(e.X, e.Y);
-                ((Form2)ParentForm).rectangle = new MyRectangle(point1, point2,
+                switch (((Form1)ParentForm.ParentForm).figureNumber)
+                {
+                    case 1:
+                        ((Form1)ParentForm.ParentForm).figure = new MyRectangle(point1, point2,
                     lineColor: ((Form1)ParentForm.ParentForm).paramLineColor,
                     fillColor: ((Form1)ParentForm.ParentForm).paramFillColor,
                     dashColor: ((Form1)ParentForm.ParentForm).paramDashColor,
                     thickness: ((Form1)ParentForm.ParentForm).paramThickness,
                     isFill: ((Form1)ParentForm.ParentForm).paramIsFill);
+                        break;
+                    case 2:
+                        ((Form1)ParentForm.ParentForm).figure = new Ellipse(point1, point2,
+                    lineColor: ((Form1)ParentForm.ParentForm).paramLineColor,
+                    fillColor: ((Form1)ParentForm.ParentForm).paramFillColor,
+                    dashColor: ((Form1)ParentForm.ParentForm).paramDashColor,
+                    thickness: ((Form1)ParentForm.ParentForm).paramThickness,
+                    isFill: ((Form1)ParentForm.ParentForm).paramIsFill);
+                        break;
+                    case 3:
+                        ((Form1)ParentForm.ParentForm).figure = new Line(point1, point2,
+                    lineColor: ((Form1)ParentForm.ParentForm).paramLineColor,
+                    dashColor: ((Form1)ParentForm.ParentForm).paramDashColor,
+                    thickness: ((Form1)ParentForm.ParentForm).paramThickness);
+                        break;
+                    case 4:
+                        Point[] points = new Point[256];
+                        points[0].X = point1.X;
+                        points[0].Y = point1.Y;
+                        ((Form1)ParentForm.ParentForm).figure = new Curve(points,
+                    lineColor: ((Form1)ParentForm.ParentForm).paramLineColor,
+                    dashColor: ((Form1)ParentForm.ParentForm).paramDashColor,
+                    thickness: ((Form1)ParentForm.ParentForm).paramThickness);
+                        break;
+                }
             }
         }
 
@@ -48,29 +76,14 @@ namespace WinFormsApp1
         {
             if (draw)
             {
-                ((Form2)ParentForm).rectangle.Hide(g);
+                ((Form1)ParentForm.ParentForm).figure.Hide(g);
                 point2 = new Point(e.X, e.Y);
-                if (point2.X > 0 && point2.X < Size.Width &&
-                    point2.Y > 0 && point2.Y < Size.Height)
+                if (!(point2.X > 0 && point2.X < Size.Width) ||
+                    !(point2.Y > 0 && point2.Y < Size.Height))
                 {
-                    ((Form2)ParentForm).rectangle = new MyRectangle(point1, point2,
-                        lineColor: ((Form1)ParentForm.ParentForm).paramLineColor,
-                        fillColor: ((Form1)ParentForm.ParentForm).paramFillColor,
-                        dashColor: ((Form1)ParentForm.ParentForm).paramDashColor,
-                        thickness: ((Form1)ParentForm.ParentForm).paramThickness,
-                        isFill: ((Form1)ParentForm.ParentForm).paramIsFill);
+                    ((Form1)ParentForm.ParentForm).figure.dashColor = Color.Red;
                 }
-                else if (!(point2.X > 0 && point2.X < Size.Width) ||
-                         !(point2.Y > 0 && point2.Y < Size.Height))
-                {
-                    ((Form2)ParentForm).rectangle = new MyRectangle(point1, point2,
-                        lineColor: ((Form1)ParentForm.ParentForm).paramLineColor,
-                        fillColor: ((Form1)ParentForm.ParentForm).paramFillColor,
-                        dashColor: Color.Red,
-                        thickness: ((Form1)ParentForm.ParentForm).paramThickness,
-                        isFill: ((Form1)ParentForm.ParentForm).paramIsFill); ;
-                }
-                ((Form2)ParentForm).rectangle.DrawDash(g);
+                ((Form1)ParentForm.ParentForm).figure.DrawDash(g);
             }
         }
 
@@ -86,10 +99,11 @@ namespace WinFormsApp1
         {
             if (draw && e.Button == MouseButtons.Left)
             {
-                if (((Form2)ParentForm).rectangle.inBorder(Size))
+                
+                if (((Form1)ParentForm.ParentForm).figure.inBorder(Size))
                 {
-                    ((Form2)ParentForm).rectangle.Draw(g);
-                    array.Add(((Form2)ParentForm).rectangle);
+                    ((Form1)ParentForm.ParentForm).figure.Draw(g);
+                    array.Add(((Form1)ParentForm.ParentForm).figure);
 
                     if (!((Form2)ParentForm).save)
                     {
@@ -102,7 +116,7 @@ namespace WinFormsApp1
                 }
                 else
                 {
-                    ((Form2)ParentForm).rectangle.Hide(g);
+                    ((Form1)ParentForm.ParentForm).figure.Hide(g);
                 }
 
             }

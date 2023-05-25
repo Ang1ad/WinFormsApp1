@@ -9,6 +9,7 @@ namespace WinFormsApp1
 {
     public partial class Form1 : Form
     {
+        
         public Form1()
         {
             InitializeComponent();
@@ -20,7 +21,8 @@ namespace WinFormsApp1
         public int paramThickness = 1;
         public bool paramIsFill = false;
 
-
+        public int figureNumber = 1;
+        public Figure figure;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -36,7 +38,7 @@ namespace WinFormsApp1
         {
             FileSize fileSize = new FileSize();
             DialogResult result = fileSize.ShowDialog(this);
-            if (result == DialogResult.OK) 
+            if (result == DialogResult.OK)
             {
                 Form f = new Form2(fileSize.size);
                 f.MdiParent = this;
@@ -169,6 +171,57 @@ namespace WinFormsApp1
             paramIsFill = вклToolStripMenuItem.Checked;
         }
 
-        
+        private void прямоугольникToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            прямоугольникToolStripMenuItem.Checked = !прямоугольникToolStripMenuItem.Checked;
+            криваяToolStripMenuItem.Checked = false;
+            эллипсToolStripMenuItem.Checked = false;
+            прямаяToolStripMenuItem.Checked = false;
+        }
+
+        private void эллипсToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            эллипсToolStripMenuItem.Checked = !эллипсToolStripMenuItem.Checked;
+            прямоугольникToolStripMenuItem.Checked = false;
+            криваяToolStripMenuItem.Checked = false;
+            прямаяToolStripMenuItem.Checked = false;
+        }
+
+        private void прямаяToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            прямаяToolStripMenuItem.Checked = !прямаяToolStripMenuItem.Checked;
+            прямоугольникToolStripMenuItem.Checked = false;
+            эллипсToolStripMenuItem.Checked = false;
+            криваяToolStripMenuItem.Checked = false;
+        }
+
+        private void криваяToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            криваяToolStripMenuItem.Checked = !криваяToolStripMenuItem.Checked;
+            прямоугольникToolStripMenuItem.Checked = false;
+            эллипсToolStripMenuItem.Checked = false;
+            прямаяToolStripMenuItem.Checked = false;
+        }
+
+        private void ChooseRectangle()
+        {
+            figureNumber = Convert.ToInt32(1);
+            //figure =
+        }
+
+        private void ChooseEllipse()
+        {
+            figureNumber = 2;
+        }
+
+        private void ChooseLine()
+        {
+            figureNumber = 3;
+        }
+
+        private void ChooseCurve()
+        {
+            figureNumber = 4;
+        }
     }
 }

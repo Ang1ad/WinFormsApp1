@@ -42,6 +42,11 @@
             режимЗаливкиToolStripMenuItem = new ToolStripMenuItem();
             вклToolStripMenuItem = new ToolStripMenuItem();
             выклToolStripMenuItem = new ToolStripMenuItem();
+            фигураToolStripMenuItem = new ToolStripMenuItem();
+            прямоугольникToolStripMenuItem = new ToolStripMenuItem();
+            эллипсToolStripMenuItem = new ToolStripMenuItem();
+            прямаяToolStripMenuItem = new ToolStripMenuItem();
+            криваяToolStripMenuItem = new ToolStripMenuItem();
             saveFileDialog1 = new SaveFileDialog();
             openFileDialog1 = new OpenFileDialog();
             menuStrip1.SuspendLayout();
@@ -50,7 +55,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(18, 18);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { файлToolStripMenuItem, окноToolStripMenuItem, параметрыToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { файлToolStripMenuItem, окноToolStripMenuItem, параметрыToolStripMenuItem, фигураToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.MdiWindowListItem = окноToolStripMenuItem;
             menuStrip1.Name = "menuStrip1";
@@ -112,21 +117,21 @@
             // цветЛинииToolStripMenuItem
             // 
             цветЛинииToolStripMenuItem.Name = "цветЛинииToolStripMenuItem";
-            цветЛинииToolStripMenuItem.Size = new Size(198, 24);
+            цветЛинииToolStripMenuItem.Size = new Size(175, 24);
             цветЛинииToolStripMenuItem.Text = "Цвет линии";
             цветЛинииToolStripMenuItem.Click += цветЛинииToolStripMenuItem_Click;
             // 
             // цветЗаливкиToolStripMenuItem
             // 
             цветЗаливкиToolStripMenuItem.Name = "цветЗаливкиToolStripMenuItem";
-            цветЗаливкиToolStripMenuItem.Size = new Size(198, 24);
+            цветЗаливкиToolStripMenuItem.Size = new Size(175, 24);
             цветЗаливкиToolStripMenuItem.Text = "Цвет заливки";
             цветЗаливкиToolStripMenuItem.Click += цветЗаливкиToolStripMenuItem_Click;
             // 
             // толщинаЛинииToolStripMenuItem
             // 
             толщинаЛинииToolStripMenuItem.Name = "толщинаЛинииToolStripMenuItem";
-            толщинаЛинииToolStripMenuItem.Size = new Size(198, 24);
+            толщинаЛинииToolStripMenuItem.Size = new Size(175, 24);
             толщинаЛинииToolStripMenuItem.Text = "Толщина линии";
             толщинаЛинииToolStripMenuItem.Click += толщинаЛинииToolStripMenuItem_Click;
             // 
@@ -134,13 +139,13 @@
             // 
             режимЗаливкиToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { вклToolStripMenuItem, выклToolStripMenuItem });
             режимЗаливкиToolStripMenuItem.Name = "режимЗаливкиToolStripMenuItem";
-            режимЗаливкиToolStripMenuItem.Size = new Size(198, 24);
+            режимЗаливкиToolStripMenuItem.Size = new Size(175, 24);
             режимЗаливкиToolStripMenuItem.Text = "Режим заливки";
             // 
             // вклToolStripMenuItem
             // 
             вклToolStripMenuItem.Name = "вклToolStripMenuItem";
-            вклToolStripMenuItem.Size = new Size(198, 24);
+            вклToolStripMenuItem.Size = new Size(114, 24);
             вклToolStripMenuItem.Text = "Вкл.";
             вклToolStripMenuItem.Click += вклToolStripMenuItem_Click;
             // 
@@ -149,9 +154,44 @@
             выклToolStripMenuItem.Checked = true;
             выклToolStripMenuItem.CheckState = CheckState.Checked;
             выклToolStripMenuItem.Name = "выклToolStripMenuItem";
-            выклToolStripMenuItem.Size = new Size(198, 24);
+            выклToolStripMenuItem.Size = new Size(114, 24);
             выклToolStripMenuItem.Text = "Выкл.";
             выклToolStripMenuItem.Click += выклToolStripMenuItem_Click;
+            // 
+            // фигураToolStripMenuItem
+            // 
+            фигураToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { прямоугольникToolStripMenuItem, эллипсToolStripMenuItem, прямаяToolStripMenuItem, криваяToolStripMenuItem });
+            фигураToolStripMenuItem.Name = "фигураToolStripMenuItem";
+            фигураToolStripMenuItem.Size = new Size(62, 21);
+            фигураToolStripMenuItem.Text = "Фигура";
+            // 
+            // прямоугольникToolStripMenuItem
+            // 
+            прямоугольникToolStripMenuItem.Name = "прямоугольникToolStripMenuItem";
+            прямоугольникToolStripMenuItem.Size = new Size(198, 24);
+            прямоугольникToolStripMenuItem.Text = "Прямоугольник";
+            прямоугольникToolStripMenuItem.Click += прямоугольникToolStripMenuItem_Click;
+            // 
+            // эллипсToolStripMenuItem
+            // 
+            эллипсToolStripMenuItem.Name = "эллипсToolStripMenuItem";
+            эллипсToolStripMenuItem.Size = new Size(198, 24);
+            эллипсToolStripMenuItem.Text = "Эллипс";
+            эллипсToolStripMenuItem.Click += эллипсToolStripMenuItem_Click;
+            // 
+            // прямаяToolStripMenuItem
+            // 
+            прямаяToolStripMenuItem.Name = "прямаяToolStripMenuItem";
+            прямаяToolStripMenuItem.Size = new Size(198, 24);
+            прямаяToolStripMenuItem.Text = "Прямая";
+            прямаяToolStripMenuItem.Click += прямаяToolStripMenuItem_Click;
+            // 
+            // криваяToolStripMenuItem
+            // 
+            криваяToolStripMenuItem.Name = "криваяToolStripMenuItem";
+            криваяToolStripMenuItem.Size = new Size(198, 24);
+            криваяToolStripMenuItem.Text = "Кривая";
+            криваяToolStripMenuItem.Click += криваяToolStripMenuItem_Click;
             // 
             // openFileDialog1
             // 
@@ -193,5 +233,10 @@
         private ToolStripMenuItem режимЗаливкиToolStripMenuItem;
         public ToolStripMenuItem вклToolStripMenuItem;
         public ToolStripMenuItem выклToolStripMenuItem;
+        private ToolStripMenuItem фигураToolStripMenuItem;
+        public ToolStripMenuItem прямоугольникToolStripMenuItem;
+        public ToolStripMenuItem эллипсToolStripMenuItem;
+        public ToolStripMenuItem прямаяToolStripMenuItem;
+        public ToolStripMenuItem криваяToolStripMenuItem;
     }
 }

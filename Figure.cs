@@ -16,6 +16,7 @@ namespace WinFormsApp1
         public Color lineColor, fillColor, dashColor;
         public int thickness;
         public bool isFill;
+        public Point[] points = new Point[256];
 
         protected Figure(Point point1, Point point2, Color lineColor, Color fillColor, Color dashColor, int thickness, bool isFill)
         {
@@ -28,6 +29,23 @@ namespace WinFormsApp1
             this.isFill = isFill;
         }
 
+        protected Figure(Point point1, Point point2, Color lineColor, Color dashColor, int thickness)
+        {
+            this.point1 = point1;
+            this.point2 = point2;
+            this.lineColor = lineColor;
+            this.dashColor = dashColor;
+            this.thickness = thickness;
+        }
+
+        protected Figure(Point[] points, Color lineColor, Color dashColor, int thickness)
+        {
+            this.points = points;
+            this.lineColor = lineColor;
+            this.dashColor = dashColor;
+            this.thickness = thickness;
+        }
+
         public abstract void Draw(Graphics g);
 
         public abstract void DrawDash(Graphics g);
@@ -37,4 +55,5 @@ namespace WinFormsApp1
         public abstract bool inBorder(Size size);
     }
 
+    
 }
