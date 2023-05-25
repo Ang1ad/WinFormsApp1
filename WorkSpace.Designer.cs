@@ -39,8 +39,6 @@
             Load += WorkSpace_Load;
             Paint += WorkSpace_Paint;
             MouseDown += WorkSpace_MouseDown;
-            MouseEnter += WorkSpace_MouseEnter;
-            MouseLeave += WorkSpace_MouseLeave;
             MouseMove += WorkSpace_MouseMove;
             MouseUp += WorkSpace_MouseUp;
             ResumeLayout(false);

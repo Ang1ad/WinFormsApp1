@@ -130,16 +130,6 @@ namespace WinFormsApp1
             }
         }
 
-        private void WorkSpace_MouseEnter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void WorkSpace_MouseLeave(object sender, EventArgs e)
-        {
-
-        }
-
         private void WorkSpace_Load(object sender, EventArgs e)
         {
             bufferContext = new BufferedGraphicsContext();
