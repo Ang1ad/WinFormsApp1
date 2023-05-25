@@ -82,6 +82,7 @@ namespace WinFormsApp1
                     !(point2.Y > 0 && point2.Y < Size.Height))
                 {
                     ((Form1)ParentForm.ParentForm).figure.dashColor = Color.Red;
+                    ((Form1)ParentForm.ParentForm).figure.point2 = new Point(e.X, e.Y);
                 }
                 ((Form1)ParentForm.ParentForm).figure.DrawDash(g);
             }
