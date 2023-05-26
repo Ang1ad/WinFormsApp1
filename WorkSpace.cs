@@ -39,12 +39,10 @@ namespace WinFormsApp1
                 //g = CreateGraphics();
                 point1 = new Point(e.X, e.Y);
                 point2 = new Point(e.X, e.Y);
-                
                 switch (((Form1)ParentForm.ParentForm).figureNumber)
                 {
                     case 1:
-                        ((Form1)ParentForm.ParentForm).figure = new MyRectangle(
-                            point1, point2,
+                        ((Form1)ParentForm.ParentForm).figure = new MyRectangle(point1, point2,
                     lineColor: ((Form1)ParentForm.ParentForm).paramLineColor,
                     fillColor: ((Form1)ParentForm.ParentForm).paramFillColor,
                     dashColor: ((Form1)ParentForm.ParentForm).paramDashColor,
@@ -82,12 +80,11 @@ namespace WinFormsApp1
                 //((Form1)ParentForm.ParentForm).figure.Hide(g);
                 buffer.Render(g);
                 buffer.Graphics.FillRectangle(new SolidBrush(Color.White), DisplayRectangle);
-                point2 = new Point(e.X, e.Y);
                 foreach (Figure f in array)
                 {
                     f.Draw(buffer.Graphics);
                 }
-                
+                point2 = new Point(e.X, e.Y);
                 if ((point2.X > 0 && point2.X < Size.Width) ||
                     (point2.Y > 0 && point2.Y < Size.Height))
                 {

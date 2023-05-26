@@ -12,8 +12,8 @@ namespace WinFormsApp1
         public Curve (Point point1, Point point2, Color lineColor, Color dashColor, int thickness) :
             base (point1, point2, lineColor, dashColor, thickness) 
         {
-            this.points.Add(point1);
-            this.points.Add(point2);
+            points.Add(point1);
+            points.Add(point2);
         }
 
         public override void Draw(Graphics g)
@@ -26,7 +26,8 @@ namespace WinFormsApp1
         {
             Pen pen = new Pen(dashColor, thickness);
             pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            g.DrawCurve(pen, points.ToArray());
+            points.Add(new Point(point2.X, point2.Y));
+            g.DrawCurve(pen, points.ToArray<Point>());
         }
 
         public override void Hide(Graphics g)

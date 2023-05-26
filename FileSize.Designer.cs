@@ -47,6 +47,7 @@
             // radioButton1
             // 
             radioButton1.AutoSize = true;
+            radioButton1.Checked = true;
             radioButton1.Location = new Point(13, 13);
             radioButton1.Name = "radioButton1";
             radioButton1.Size = new Size(74, 21);
@@ -63,7 +64,6 @@
             radioButton2.Name = "radioButton2";
             radioButton2.Size = new Size(74, 21);
             radioButton2.TabIndex = 1;
-            radioButton2.TabStop = true;
             radioButton2.Text = "640х480";
             radioButton2.UseVisualStyleBackColor = true;
             radioButton2.CheckedChanged += radioButton2_CheckedChanged;
@@ -75,7 +75,6 @@
             radioButton3.Name = "radioButton3";
             radioButton3.Size = new Size(74, 21);
             radioButton3.TabIndex = 2;
-            radioButton3.TabStop = true;
             radioButton3.Text = "800х600";
             radioButton3.UseVisualStyleBackColor = true;
             radioButton3.CheckedChanged += radioButton3_CheckedChanged;

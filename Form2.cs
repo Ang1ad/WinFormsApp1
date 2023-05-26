@@ -41,11 +41,17 @@ namespace WinFormsApp1
 
         }
 
-        private void FormClose(object sender, FormClosingEventArgs e)
+        private void FormActivate(object sender, EventArgs e)
+        {
+            ((Form1)ParentForm).сохранитьToolStripMenuItem.Enabled = open && save;
+            ((Form1)ParentForm).сохранитьКакToolStripMenuItem.Enabled = true;
+        }
+
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (save)
             {
-                DialogResult dr = MessageBox.Show("Сохранить изменения?", "", MessageBoxButtons.YesNoCancel);
+                DialogResult dr = MessageBox.Show("Сохранить изменения?", ((Form1)ParentForm).ActiveMdiChild.Text.ToString(), MessageBoxButtons.YesNoCancel);
 
                 if (dr == DialogResult.Yes)
                 {
@@ -62,12 +68,6 @@ namespace WinFormsApp1
                 ((Form1)ParentForm).сохранитьToolStripMenuItem.Enabled = false;
                 ((Form1)ParentForm).сохранитьКакToolStripMenuItem.Enabled = false;
             }
-        }
-
-        private void FormActivate(object sender, EventArgs e)
-        {
-            ((Form1)ParentForm).сохранитьToolStripMenuItem.Enabled = open && save;
-            ((Form1)ParentForm).сохранитьКакToolStripMenuItem.Enabled = true;
         }
     }
 }

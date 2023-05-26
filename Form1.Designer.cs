@@ -167,29 +167,31 @@
             // 
             // прямоугольникToolStripMenuItem
             // 
+            прямоугольникToolStripMenuItem.Checked = true;
+            прямоугольникToolStripMenuItem.CheckState = CheckState.Checked;
             прямоугольникToolStripMenuItem.Name = "прямоугольникToolStripMenuItem";
-            прямоугольникToolStripMenuItem.Size = new Size(176, 24);
+            прямоугольникToolStripMenuItem.Size = new Size(198, 24);
             прямоугольникToolStripMenuItem.Text = "Прямоугольник";
             прямоугольникToolStripMenuItem.Click += прямоугольникToolStripMenuItem_Click;
             // 
             // эллипсToolStripMenuItem
             // 
             эллипсToolStripMenuItem.Name = "эллипсToolStripMenuItem";
-            эллипсToolStripMenuItem.Size = new Size(176, 24);
+            эллипсToolStripMenuItem.Size = new Size(198, 24);
             эллипсToolStripMenuItem.Text = "Эллипс";
             эллипсToolStripMenuItem.Click += эллипсToolStripMenuItem_Click;
             // 
             // прямаяToolStripMenuItem
             // 
             прямаяToolStripMenuItem.Name = "прямаяToolStripMenuItem";
-            прямаяToolStripMenuItem.Size = new Size(176, 24);
+            прямаяToolStripMenuItem.Size = new Size(198, 24);
             прямаяToolStripMenuItem.Text = "Прямая";
             прямаяToolStripMenuItem.Click += прямаяToolStripMenuItem_Click;
             // 
             // криваяToolStripMenuItem
             // 
             криваяToolStripMenuItem.Name = "криваяToolStripMenuItem";
-            криваяToolStripMenuItem.Size = new Size(176, 24);
+            криваяToolStripMenuItem.Size = new Size(198, 24);
             криваяToolStripMenuItem.Text = "Кривая";
             криваяToolStripMenuItem.Click += криваяToolStripMenuItem_Click;
             // 

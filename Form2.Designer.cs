@@ -39,8 +39,9 @@
             ClientSize = new Size(784, 559);
             Name = "Form2";
             Text = "Form2";
+            Activated += FormActivate;
+            FormClosing += Form2_FormClosing;
             Load += Form2_Load;
-            Activated += new System.EventHandler(this.FormActivate);
             ResumeLayout(false);
         }
 
