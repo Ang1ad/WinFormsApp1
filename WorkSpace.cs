@@ -21,11 +21,12 @@ namespace WinFormsApp1
             Size = size;
         }
 
+        public Graphics g;
         public BufferedGraphics buffer;
         public BufferedGraphicsContext bufferContext;
+
         public bool draw = false;
         public List<Figure> array = new List<Figure>();
-        public Graphics g;
         private Point point1;
         private Point point2;
 
@@ -33,14 +34,17 @@ namespace WinFormsApp1
         {
             if (e.Button == MouseButtons.Left)
             {
+                
                 draw = true;
                 //g = CreateGraphics();
                 point1 = new Point(e.X, e.Y);
                 point2 = new Point(e.X, e.Y);
+                
                 switch (((Form1)ParentForm.ParentForm).figureNumber)
                 {
                     case 1:
-                        ((Form1)ParentForm.ParentForm).figure = new MyRectangle(point1, point2,
+                        ((Form1)ParentForm.ParentForm).figure = new MyRectangle(
+                            point1, point2,
                     lineColor: ((Form1)ParentForm.ParentForm).paramLineColor,
                     fillColor: ((Form1)ParentForm.ParentForm).paramFillColor,
                     dashColor: ((Form1)ParentForm.ParentForm).paramDashColor,
@@ -83,6 +87,12 @@ namespace WinFormsApp1
                     f.Draw(buffer.Graphics);
                 }
                 point2 = new Point(e.X, e.Y);
+                if ((point2.X > 0 && point2.X < Size.Width) ||
+                    (point2.Y > 0 && point2.Y < Size.Height))
+                {
+                    ((Form1)ParentForm.ParentForm).figure.dashColor = ((Form1)ParentForm.ParentForm).paramDashColor;
+                    ((Form1)ParentForm.ParentForm).figure.point2 = new Point(e.X, e.Y);
+                }
                 if (!(point2.X > 0 && point2.X < Size.Width) ||
                     !(point2.Y > 0 && point2.Y < Size.Height))
                 {
@@ -99,6 +109,10 @@ namespace WinFormsApp1
             {
                 f.Draw(e.Graphics);
             }
+            buffer.Render(e.Graphics);
+            /*Rectangle rectangle = new Rectangle();
+            rectangle.Offset(new Point(1, 2));
+            g.DrawRectangle(new Pen(Color.Black), rectangle); */
         }
 
         private void WorkSpace_MouseUp(object sender, MouseEventArgs e)
@@ -132,10 +146,13 @@ namespace WinFormsApp1
 
         private void WorkSpace_Load(object sender, EventArgs e)
         {
-            bufferContext = new BufferedGraphicsContext();
-            bufferContext.MaximumBuffer = Size;
+            bufferContext = BufferedGraphicsManager.Current;
+            bufferContext.MaximumBuffer = SystemInformation.PrimaryMonitorMaximizedWindowSize;
             g = CreateGraphics();
-            buffer = bufferContext.Allocate(g, DisplayRectangle);
+            Rectangle display = new Rectangle(0, 0, Size.Width, Size.Height);
+            buffer = bufferContext.Allocate(g, display);
+            //((Form2)ParentForm).workSpace.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            //((Form2)ParentForm).workSpace.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
     }
 }

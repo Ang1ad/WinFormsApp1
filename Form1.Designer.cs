@@ -201,7 +201,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ButtonHighlight;
+            BackColor = Color.White;
             ClientSize = new Size(1008, 727);
             Controls.Add(menuStrip1);
             DoubleBuffered = true;
@@ -225,7 +225,7 @@
         private ToolStripMenuItem открытьToolStripMenuItem;
         public ToolStripMenuItem сохранитьToolStripMenuItem;
         public ToolStripMenuItem сохранитьКакToolStripMenuItem;
-        private SaveFileDialog saveFileDialog1;
+        public SaveFileDialog saveFileDialog1;
         private OpenFileDialog openFileDialog1;
         private ToolStripMenuItem параметрыToolStripMenuItem;
         private ToolStripMenuItem цветЛинииToolStripMenuItem;

@@ -51,6 +51,9 @@ namespace WinFormsApp1
                 {
                     if (open) ((Form1)ParentForm).Save(this);
                     else e.Cancel = ((Form1)ParentForm).SaveAs(this);
+                    workSpace.buffer.Dispose();
+                    workSpace.bufferContext.Dispose();
+                    workSpace.g.Dispose();
                 }
                 else if (dr == DialogResult.Cancel) e.Cancel = true;
             }

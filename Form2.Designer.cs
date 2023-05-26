@@ -35,12 +35,12 @@
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            BackColor = SystemColors.ControlDark;
+            BackColor = Color.DarkGray;
             ClientSize = new Size(784, 559);
-            DoubleBuffered = true;
             Name = "Form2";
             Text = "Form2";
             Load += Form2_Load;
+            Activated += new System.EventHandler(this.FormActivate);
             ResumeLayout(false);
         }
 

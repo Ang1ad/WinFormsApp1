@@ -73,7 +73,7 @@ namespace WinFormsApp1
                 {
                     this.сохранитьКакToolStripMenuItem.Enabled = true;
                 }
-                fileStream.Dispose();
+                fileStream.Close();
             }
 
         }
@@ -177,6 +177,8 @@ namespace WinFormsApp1
             криваяToolStripMenuItem.Checked = false;
             эллипсToolStripMenuItem.Checked = false;
             прямаяToolStripMenuItem.Checked = false;
+            цветЗаливкиToolStripMenuItem.Enabled = true;
+            режимЗаливкиToolStripMenuItem.Enabled = true;
             figureNumber = 1;
         }
 
@@ -186,6 +188,8 @@ namespace WinFormsApp1
             прямоугольникToolStripMenuItem.Checked = false;
             криваяToolStripMenuItem.Checked = false;
             прямаяToolStripMenuItem.Checked = false;
+            цветЗаливкиToolStripMenuItem.Enabled = true;
+            режимЗаливкиToolStripMenuItem.Enabled = true;
             figureNumber = 2;
         }
 
