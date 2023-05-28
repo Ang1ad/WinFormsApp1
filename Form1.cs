@@ -3,6 +3,7 @@ using Microsoft.VisualBasic.Devices;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography.X509Certificates;
 using System.Xml.Linq;
 
 namespace WinFormsApp1
@@ -36,45 +37,12 @@ namespace WinFormsApp1
 
         private void новыйToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileSize fileSize = new FileSize();
-            DialogResult result = fileSize.ShowDialog(this);
-            if (result == DialogResult.OK)
-            {
-                Form f = new Form2(fileSize.size);
-                f.MdiParent = this;
-                f.Text = "Рисунок " + this.MdiChildren.Length.ToString();
-                if (!this.сохранитьКакToolStripMenuItem.Enabled)
-                {
-                    this.сохранитьКакToolStripMenuItem.Enabled = true;
-                }
-                fileSize.Close();
-                f.Show();
-            }
+            CreateFile();
         }
-
-        //Class1 class = new Class1();
 
         private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = Environment.CurrentDirectory;
-            openFileDialog1.Filter = "JPG(*.JPG)|*.jpg";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                BinaryFormatter bf = new BinaryFormatter();
-                Stream fileStream = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                SaveData data = (SaveData)bf.Deserialize(fileStream);
-                Form f = new Form2(data.size);
-                ((Form2)f).open = true;
-                f.MdiParent = this;
-                f.Text = openFileDialog1.FileName;
-                ((Form2)f).workSpace.array = data.arrayOfFigures;
-                f.Show();
-                if (!this.сохранитьКакToolStripMenuItem.Enabled)
-                {
-                    this.сохранитьКакToolStripMenuItem.Enabled = true;
-                }
-                fileStream.Close();
-            }
+            OpenFile();
 
         }
 
@@ -121,19 +89,7 @@ namespace WinFormsApp1
 
         private void толщинаЛинииToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ThicknessDialog thicknessDialog = new ThicknessDialog();
-            thicknessDialog.comboBox1.Text = paramThickness.ToString();
-            DialogResult result = thicknessDialog.ShowDialog(this);
-            if (result == DialogResult.OK)
-            {
-                paramThickness = Convert.ToInt32(thicknessDialog.comboBox1.SelectedItem);
-                thicknessDialog.comboBox1.Text = thicknessDialog.comboBox1.SelectedItem.ToString();
-                thicknessDialog.Close();
-            }
-            else if (result == DialogResult.Cancel)
-            {
-                thicknessDialog.Close();
-            }
+            ChangeThickness();
         }
 
         private void цветЛинииToolStripMenuItem_Click(object sender, EventArgs e)
@@ -173,48 +129,259 @@ namespace WinFormsApp1
 
         private void прямоугольникToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ChooseRectangle();
+        }
+
+        private void эллипсToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChooseEllipse();
+        }
+
+        private void прямаяToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChooseLine();
+        }
+
+        private void криваяToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChooseCurve();
+        }
+
+        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void toolStripStatusLabel2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //StatusStrip statusBar = new StatusStrip();
+        //Graphics graphicsStatusBar;
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+            ChooseRectangle();
+        }
+
+        public void ChooseRectangle()
+        {
             прямоугольникToolStripMenuItem.Checked = !прямоугольникToolStripMenuItem.Checked;
             криваяToolStripMenuItem.Checked = false;
             эллипсToolStripMenuItem.Checked = false;
             прямаяToolStripMenuItem.Checked = false;
+            toolStripButton8.Checked = false;
+            toolStripButton9.Checked = false;
+            toolStripButton10.Checked = false;
             цветЗаливкиToolStripMenuItem.Enabled = true;
             режимЗаливкиToolStripMenuItem.Enabled = true;
             figureNumber = 1;
         }
 
-        private void эллипсToolStripMenuItem_Click(object sender, EventArgs e)
+        public void ChooseEllipse()
         {
             эллипсToolStripMenuItem.Checked = !эллипсToolStripMenuItem.Checked;
             прямоугольникToolStripMenuItem.Checked = false;
             криваяToolStripMenuItem.Checked = false;
             прямаяToolStripMenuItem.Checked = false;
+            toolStripButton7.Checked = false;
+            toolStripButton9.Checked = false;
+            toolStripButton10.Checked = false;
             цветЗаливкиToolStripMenuItem.Enabled = true;
             режимЗаливкиToolStripMenuItem.Enabled = true;
             figureNumber = 2;
         }
 
-        private void прямаяToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripButton8_Click(object sender, EventArgs e)
+        {
+            ChooseEllipse();
+        }
+
+        private void toolStripButton9_Click(object sender, EventArgs e)
+        {
+            ChooseLine();
+        }
+
+        public void ChooseLine()
         {
             прямаяToolStripMenuItem.Checked = !прямаяToolStripMenuItem.Checked;
             прямоугольникToolStripMenuItem.Checked = false;
             эллипсToolStripMenuItem.Checked = false;
             криваяToolStripMenuItem.Checked = false;
+            toolStripButton7.Checked = false;
+            toolStripButton8.Checked = false;
+            toolStripButton10.Checked = false;
             цветЗаливкиToolStripMenuItem.Enabled = false;
             режимЗаливкиToolStripMenuItem.Enabled = false;
             режимЗаливкиToolStripMenuItem.Checked = false;
             figureNumber = 3;
         }
 
-        private void криваяToolStripMenuItem_Click(object sender, EventArgs e)
+        public void ChooseCurve()
         {
             криваяToolStripMenuItem.Checked = !криваяToolStripMenuItem.Checked;
             прямоугольникToolStripMenuItem.Checked = false;
             эллипсToolStripMenuItem.Checked = false;
             прямаяToolStripMenuItem.Checked = false;
+            toolStripButton7.Checked = false;
+            toolStripButton8.Checked = false;
+            toolStripButton9.Checked = false;
             цветЗаливкиToolStripMenuItem.Enabled = false;
             режимЗаливкиToolStripMenuItem.Enabled = false;
             режимЗаливкиToolStripMenuItem.Checked = false;
             figureNumber = 4;
         }
+
+        private void toolStripButton10_Click(object sender, EventArgs e) //кривая
+        {
+            ChooseCurve();
+        }
+
+        public void toolStripButton6_Click(object sender, EventArgs e) //размер окна
+        {
+            if (toolStripButton6.Checked = true)
+            {
+                toolStripButton6.Checked = !toolStripButton6.Checked;
+            }
+            else
+            {
+                FileSize size = new FileSize();
+                DialogResult result = size.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    Form f = new Form2(size.size);
+                }
+                toolStripButton6.Checked = !toolStripButton6.Checked;
+            }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e) //создание файла
+        {
+            CreateFile();
+        }
+
+        public void CreateFile()
+        {
+            if (toolStripButton6.Checked = false)
+            {
+                FileSize fileSize = new FileSize();
+                DialogResult result = fileSize.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    Form f = new Form2(fileSize.size);
+                    f.MdiParent = this;
+                    f.Text = "Рисунок " + this.MdiChildren.Length.ToString();
+                    if (!this.сохранитьКакToolStripMenuItem.Enabled)
+                    {
+                        this.сохранитьКакToolStripMenuItem.Enabled = true;
+                    }
+                    fileSize.Close();
+                    f.Show();
+                }
+            }
+            else
+            {
+                Form f = new Form2(this.size);
+                f.MdiParent = this;
+                f.Text = "Рисунок " + this.MdiChildren.Length.ToString();
+                if (!this.сохранитьКакToolStripMenuItem.Enabled)
+                {
+                    this.сохранитьКакToolStripMenuItem.Enabled = true;
+                }
+                size.Close();
+                f.Show();
+            }
+        }
+
+        public void OpenFile()
+        {
+            openFileDialog1.InitialDirectory = Environment.CurrentDirectory;
+            openFileDialog1.Filter = "JPG(*.JPG)|*.jpg";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                Stream fileStream = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                SaveData data = (SaveData)bf.Deserialize(fileStream);
+                Form f = new Form2(data.size);
+                ((Form2)f).open = true;
+                f.MdiParent = this;
+                f.Text = openFileDialog1.FileName;
+                ((Form2)f).workSpace.array = data.arrayOfFigures;
+                f.Show();
+                if (!this.сохранитьКакToolStripMenuItem.Enabled)
+                {
+                    this.сохранитьКакToolStripMenuItem.Enabled = true;
+                }
+                fileStream.Close();
+            }
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e) //открытие
+        {
+            OpenFile();
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e) //толщина
+        {
+            ChangeThickness();
+        }
+
+        public void ChangeThickness()
+        {
+            ThicknessDialog thicknessDialog = new ThicknessDialog();
+            thicknessDialog.comboBox1.Text = paramThickness.ToString();
+            DialogResult result = thicknessDialog.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                paramThickness = Convert.ToInt32(thicknessDialog.comboBox1.SelectedItem);
+                thicknessDialog.comboBox1.Text = thicknessDialog.comboBox1.SelectedItem.ToString();
+                thicknessDialog.Close();
+            }
+            else if (result == DialogResult.Cancel)
+            {
+                thicknessDialog.Close();
+            }
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e) // цвет линии
+        {
+            changeColor(ref paramLineColor);
+        }
+
+        private void toolStripButton11_Click(object sender, EventArgs e) // заливка
+        {
+            if (toolStripButton11.Checked)
+            {
+                выклToolStripMenuItem.Checked = true;
+                вклToolStripMenuItem.Checked = !выклToolStripMenuItem.Checked;
+                paramIsFill = вклToolStripMenuItem.Checked;
+                toolStripButton11.Checked = false;
+            }
+            else
+            {
+                changeColor(ref paramFillColor);
+                toolStripButton11.Checked = !toolStripButton11.Checked;
+                вклToolStripMenuItem.Checked = toolStripButton11.Checked;
+                выклToolStripMenuItem.Checked = !вклToolStripMenuItem.Checked;
+                paramIsFill = вклToolStripMenuItem.Checked;
+            }
+            
+            
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e) //сохранение
+        {
+            if (окноToolStripMenuItem.Enabled)
+            {
+                Save((Form2)ActiveMdiChild);
+            }
+            else
+            {
+                SaveAs((Form2)ActiveMdiChild);
+            }
+        }
+        //Кнопка размера рисунка
+        //Нижняя панель
     }
 }
