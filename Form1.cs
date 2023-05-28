@@ -238,7 +238,7 @@ namespace WinFormsApp1
             ChooseCurve();
         }
 
-        public void toolStripButton6_Click(object sender, EventArgs e) //размер окна
+        private void toolStripButton6_Click(object sender, EventArgs e) //размер окна
         {
             if (toolStripButton6.Checked = true)
             {
@@ -282,7 +282,7 @@ namespace WinFormsApp1
             }
             else
             {
-                Form f = new Form2(this.size);
+                Form f = new Form2(size);
                 f.MdiParent = this;
                 f.Text = "Рисунок " + this.MdiChildren.Length.ToString();
                 if (!this.сохранитьКакToolStripMenuItem.Enabled)
