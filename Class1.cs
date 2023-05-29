@@ -10,11 +10,7 @@ namespace WinFormsApp1
     {
         List<string> strings = new List<string>();
 
-        public Class1() //конструктор
-        {
-
-        }
-        ~Class1() //деструктор
+        public Class1()
         {
 
         }
