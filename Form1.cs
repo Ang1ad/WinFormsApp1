@@ -263,33 +263,18 @@ namespace WinFormsApp1
 
         public void CreateFile()
         {
-            if (toolStripButton6.Checked = false)
+            FileSize fileSize = new FileSize();
+            DialogResult result = fileSize.ShowDialog(this);
+            if (result == DialogResult.OK)
             {
-                FileSize fileSize = new FileSize();
-                DialogResult result = fileSize.ShowDialog(this);
-                if (result == DialogResult.OK)
-                {
-                    Form f = new Form2(fileSize.size);
-                    f.MdiParent = this;
-                    f.Text = "Рисунок " + this.MdiChildren.Length.ToString();
-                    if (!this.сохранитьКакToolStripMenuItem.Enabled)
-                    {
-                        this.сохранитьКакToolStripMenuItem.Enabled = true;
-                    }
-                    fileSize.Close();
-                    f.Show();
-                }
-            }
-            else
-            {
-                Form f = new Form2(size);
+                Form f = new Form2(fileSize.size);
                 f.MdiParent = this;
                 f.Text = "Рисунок " + this.MdiChildren.Length.ToString();
                 if (!this.сохранитьКакToolStripMenuItem.Enabled)
                 {
                     this.сохранитьКакToolStripMenuItem.Enabled = true;
                 }
-                size.Close();
+                fileSize.Close();
                 f.Show();
             }
         }
@@ -366,8 +351,8 @@ namespace WinFormsApp1
                 выклToolStripMenuItem.Checked = !вклToolStripMenuItem.Checked;
                 paramIsFill = вклToolStripMenuItem.Checked;
             }
-            
-            
+
+
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e) //сохранение

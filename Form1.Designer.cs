@@ -51,9 +51,9 @@
             saveFileDialog1 = new SaveFileDialog();
             openFileDialog1 = new OpenFileDialog();
             statusStrip1 = new StatusStrip();
-            toolStripStatusLabel1 = new ToolStripStatusLabel();
-            toolStripStatusLabel2 = new ToolStripStatusLabel();
-            toolStripStatusLabel3 = new ToolStripStatusLabel();
+            PenSize = new ToolStripStatusLabel();
+            PenSizeValue = new ToolStripStatusLabel();
+            PenColor = new ToolStripStatusLabel();
             toolStrip1 = new ToolStrip();
             toolStripButton1 = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
@@ -73,6 +73,13 @@
             toolStripButton8 = new ToolStripButton();
             toolStripButton9 = new ToolStripButton();
             toolStripButton10 = new ToolStripButton();
+            PenColorValue = new ToolStripStatusLabel();
+            FillColor = new ToolStripStatusLabel();
+            FillColorValue = new ToolStripStatusLabel();
+            MouseCoords = new ToolStripStatusLabel();
+            MouseCoordsValue = new ToolStripStatusLabel();
+            DocSize = new ToolStripStatusLabel();
+            DocSizeValue = new ToolStripStatusLabel();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
@@ -227,35 +234,35 @@
             // 
             // statusStrip1
             // 
-            statusStrip1.BackColor = Color.DarkGray;
+            statusStrip1.BackColor = Color.White;
             statusStrip1.ImageScalingSize = new Size(18, 18);
-            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, toolStripStatusLabel2, toolStripStatusLabel3 });
-            statusStrip1.Location = new Point(0, 705);
+            statusStrip1.Items.AddRange(new ToolStripItem[] { PenSize, PenSizeValue, PenColor, PenColorValue, FillColor, FillColorValue, MouseCoords, MouseCoordsValue, DocSize, DocSizeValue });
+            statusStrip1.Location = new Point(0, 701);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.ShowItemToolTips = true;
-            statusStrip1.Size = new Size(1008, 22);
+            statusStrip1.Size = new Size(1008, 26);
             statusStrip1.TabIndex = 3;
             statusStrip1.Text = "statusStrip1";
             statusStrip1.ItemClicked += statusStrip1_ItemClicked;
             // 
-            // toolStripStatusLabel1
+            // PenSize
             // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new Size(50, 17);
-            toolStripStatusLabel1.Text = "Фигура";
+            PenSize.Name = "PenSize";
+            PenSize.Size = new Size(88, 21);
+            PenSize.Text = "Размер пера:";
             // 
-            // toolStripStatusLabel2
+            // PenSizeValue
             // 
-            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new Size(131, 17);
-            toolStripStatusLabel2.Text = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Click += toolStripStatusLabel2_Click;
+            PenSizeValue.Name = "PenSizeValue";
+            PenSizeValue.Size = new Size(47, 21);
+            PenSizeValue.Text = " -- : -- ";
+            PenSizeValue.Click += toolStripStatusLabel2_Click;
             // 
-            // toolStripStatusLabel3
+            // PenColor
             // 
-            toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            toolStripStatusLabel3.Size = new Size(131, 17);
-            toolStripStatusLabel3.Text = "toolStripStatusLabel3";
+            PenColor.Name = "PenColor";
+            PenColor.Size = new Size(73, 21);
+            PenColor.Text = "Цвет пера:";
             // 
             // toolStrip1
             // 
@@ -420,6 +427,54 @@
             toolStripButton10.Text = "toolStripButton10";
             toolStripButton10.Click += toolStripButton10_Click;
             // 
+            // PenColorValue
+            // 
+            PenColorValue.AutoSize = false;
+            PenColorValue.BackColor = Color.White;
+            PenColorValue.BorderSides = ToolStripStatusLabelBorderSides.Left | ToolStripStatusLabelBorderSides.Top | ToolStripStatusLabelBorderSides.Right | ToolStripStatusLabelBorderSides.Bottom;
+            PenColorValue.BorderStyle = Border3DStyle.Etched;
+            PenColorValue.Name = "PenColorValue";
+            PenColorValue.Size = new Size(30, 21);
+            // 
+            // FillColor
+            // 
+            FillColor.Name = "FillColor";
+            FillColor.Size = new Size(91, 21);
+            FillColor.Text = "Цвет заливки:";
+            // 
+            // FillColorValue
+            // 
+            FillColorValue.AutoSize = false;
+            FillColorValue.BackColor = Color.White;
+            FillColorValue.BorderSides = ToolStripStatusLabelBorderSides.Left | ToolStripStatusLabelBorderSides.Top | ToolStripStatusLabelBorderSides.Right | ToolStripStatusLabelBorderSides.Bottom;
+            FillColorValue.BorderStyle = Border3DStyle.Etched;
+            FillColorValue.Name = "FillColorValue";
+            FillColorValue.Size = new Size(30, 21);
+            // 
+            // MouseCoords
+            // 
+            MouseCoords.Name = "MouseCoords";
+            MouseCoords.Size = new Size(138, 21);
+            MouseCoords.Text = "Координаты курсора:";
+            // 
+            // MouseCoordsValue
+            // 
+            MouseCoordsValue.Name = "MouseCoordsValue";
+            MouseCoordsValue.Size = new Size(47, 21);
+            MouseCoordsValue.Text = " -- : -- ";
+            // 
+            // DocSize
+            // 
+            DocSize.Name = "DocSize";
+            DocSize.Size = new Size(106, 21);
+            DocSize.Text = "Размер рисунка:";
+            // 
+            // DocSizeValue
+            // 
+            DocSizeValue.Name = "DocSizeValue";
+            DocSizeValue.Size = new Size(47, 21);
+            DocSizeValue.Text = " -- : -- ";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -469,9 +524,9 @@
         public ToolStripMenuItem прямаяToolStripMenuItem;
         public ToolStripMenuItem криваяToolStripMenuItem;
         private StatusStrip statusStrip1;
-        private ToolStripStatusLabel toolStripStatusLabel1;
-        private ToolStripStatusLabel toolStripStatusLabel2;
-        private ToolStripStatusLabel toolStripStatusLabel3;
+        private ToolStripStatusLabel PenSize;
+        private ToolStripStatusLabel PenSizeValue;
+        private ToolStripStatusLabel PenColor;
         private ToolStrip toolStrip1;
         private ToolStripButton toolStripButton1;
         private ToolStripSeparator toolStripSeparator1;
@@ -491,5 +546,12 @@
         private ToolStripButton toolStripButton8;
         private ToolStripButton toolStripButton9;
         private ToolStripButton toolStripButton10;
+        private ToolStripStatusLabel PenColorValue;
+        private ToolStripStatusLabel FillColor;
+        private ToolStripStatusLabel FillColorValue;
+        private ToolStripStatusLabel MouseCoords;
+        private ToolStripStatusLabel MouseCoordsValue;
+        private ToolStripStatusLabel DocSize;
+        private ToolStripStatusLabel DocSizeValue;
     }
 }
