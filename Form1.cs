@@ -14,6 +14,10 @@ namespace WinFormsApp1
         public Form1()
         {
             InitializeComponent();
+            ChangePenSizeValue();
+            ChangeLabelColor(paramLineColor, ref PenColorValue);
+            ChangeLabelColor(paramFillColor, ref FillColorValue);
+            statusStrip1.Refresh();
         }
 
         public Color paramLineColor = Color.Black;
@@ -95,11 +99,13 @@ namespace WinFormsApp1
         private void цветЛинииToolStripMenuItem_Click(object sender, EventArgs e)
         {
             changeColor(ref paramLineColor);
+            PenColorValue.BackColor = paramLineColor;
         }
 
         private void цветЗаливкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             changeColor(ref paramFillColor);
+            FillColorValue.BackColor = paramFillColor;
         }
 
         private void changeColor(ref Color color)
@@ -111,6 +117,7 @@ namespace WinFormsApp1
             {
                 color = colorDialog.Color;
             }
+            statusStrip1.Refresh();
         }
 
         private void выклToolStripMenuItem_Click(object sender, EventArgs e)
@@ -351,8 +358,6 @@ namespace WinFormsApp1
                 выклToolStripMenuItem.Checked = !вклToolStripMenuItem.Checked;
                 paramIsFill = вклToolStripMenuItem.Checked;
             }
-
-
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e) //сохранение
@@ -369,6 +374,31 @@ namespace WinFormsApp1
         //Кнопка размера рисунка
         //Нижняя панель
 
+        public void ChangeLabelColor(Color color, ref ToolStripStatusLabel label)
+        {
+            Bitmap Bitmap = new Bitmap(30, 20);
+            Rectangle rectangle = new Rectangle(0, 0, 30, 20);
+            Graphics g = Graphics.FromImage(Bitmap);
+            SolidBrush brush = new SolidBrush(color);
+            g.FillRectangle(brush, rectangle);
+            Pen pen = new Pen(Color.Black, 1);
+            g.DrawRectangle(pen, rectangle);
+            label.BackgroundImage = Bitmap;
+        }
 
+        public void ChangePenSizeValue()
+        {
+            PenSizeValue.Text = " " + paramThickness.ToString() + " ";
+        }
+
+        public void ChangeDocSizeValue(Form2 f)
+        {
+            DocSizeValue.Text = "  " + f.workSpace.Width.ToString() + "x" + f.workSpace.Height.ToString() + "  ";
+        }
+
+        public void ChangeMouseCoordsValue(MouseEventArgs e)
+        {
+            MouseCoordsValue.Text = "  " + e.X.ToString() + " ; " + e.Y.ToString() + "  ";
+        }
     }
 }
