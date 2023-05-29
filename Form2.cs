@@ -45,6 +45,7 @@ namespace WinFormsApp1
         {
             ((Form1)ParentForm).сохранитьToolStripMenuItem.Enabled = open && save;
             ((Form1)ParentForm).сохранитьКакToolStripMenuItem.Enabled = true;
+            ((Form1)ParentForm).ChangeDocSizeValue(this);
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)

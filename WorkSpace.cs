@@ -75,6 +75,7 @@ namespace WinFormsApp1
 
         private void WorkSpace_MouseMove(object sender, MouseEventArgs e)
         {
+            ((Form1)ParentForm.ParentForm).ChangeMouseCoordsValue(e);
             if (draw)
             {
                 //((Form1)ParentForm.ParentForm).figure.Hide(g);

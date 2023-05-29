@@ -17,7 +17,6 @@ namespace WinFormsApp1
             ChangePenSizeValue();
             ChangeLabelColor(paramLineColor, ref PenColorValue);
             ChangeLabelColor(paramFillColor, ref FillColorValue);
-            statusStrip1.Refresh();
         }
 
         public Color paramLineColor = Color.Black;
@@ -98,17 +97,17 @@ namespace WinFormsApp1
 
         private void цветЛинииToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            changeColor(ref paramLineColor);
+            changeColor(ref paramLineColor, ref PenColorValue);
             PenColorValue.BackColor = paramLineColor;
         }
 
         private void цветЗаливкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            changeColor(ref paramFillColor);
+            changeColor(ref paramFillColor, ref FillColorValue);
             FillColorValue.BackColor = paramFillColor;
         }
 
-        private void changeColor(ref Color color)
+        private void changeColor(ref Color color, ref ToolStripStatusLabel label)
         {
             ColorDialog colorDialog = new ColorDialog();
             colorDialog.Color = color;
@@ -116,8 +115,8 @@ namespace WinFormsApp1
             if (result == DialogResult.OK)
             {
                 color = colorDialog.Color;
+                ChangeLabelColor(color, ref label);
             }
-            statusStrip1.Refresh();
         }
 
         private void выклToolStripMenuItem_Click(object sender, EventArgs e)
@@ -283,6 +282,7 @@ namespace WinFormsApp1
                 }
                 fileSize.Close();
                 f.Show();
+                ChangeDocSizeValue((Form2)ActiveMdiChild);
             }
         }
 
@@ -329,6 +329,7 @@ namespace WinFormsApp1
                 paramThickness = Convert.ToInt32(thicknessDialog.comboBox1.SelectedItem);
                 thicknessDialog.comboBox1.Text = thicknessDialog.comboBox1.SelectedItem.ToString();
                 thicknessDialog.Close();
+                ChangePenSizeValue();
             }
             else if (result == DialogResult.Cancel)
             {
@@ -338,7 +339,7 @@ namespace WinFormsApp1
 
         private void toolStripButton5_Click(object sender, EventArgs e) // цвет линии
         {
-            changeColor(ref paramLineColor);
+            changeColor(ref paramLineColor, ref PenColorValue);
         }
 
         private void toolStripButton11_Click(object sender, EventArgs e) // заливка
@@ -352,7 +353,7 @@ namespace WinFormsApp1
             }
             else
             {
-                changeColor(ref paramFillColor);
+                changeColor(ref paramFillColor, ref FillColorValue);
                 toolStripButton11.Checked = !toolStripButton11.Checked;
                 вклToolStripMenuItem.Checked = toolStripButton11.Checked;
                 выклToolStripMenuItem.Checked = !вклToolStripMenuItem.Checked;
