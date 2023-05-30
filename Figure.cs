@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace WinFormsApp1
 {
@@ -17,6 +18,7 @@ namespace WinFormsApp1
         public int thickness;
         public bool isFill;
         protected List<Point> points = new();
+        protected Font font;
 
         protected Figure(Point point1, Point point2, Color lineColor, Color fillColor, Color dashColor, int thickness, bool isFill)
         {
@@ -38,6 +40,16 @@ namespace WinFormsApp1
             this.thickness = thickness;
         }
 
+        protected Figure(Point point1, Point point2, Color lineColor, Color dashColor, int thickness, Font font)
+        {
+            this.point1 = point1;
+            this.point2 = point2;
+            this.lineColor = lineColor;
+            this.dashColor = dashColor;
+            this.thickness = thickness;
+            this.font = font;
+        }
+
         public abstract void Draw(Graphics g);
 
         public abstract void DrawDash(Graphics g);
@@ -45,6 +57,8 @@ namespace WinFormsApp1
         public abstract void Hide(Graphics g);
 
         public abstract bool inBorder(Size size);
+
+
     }
 
     

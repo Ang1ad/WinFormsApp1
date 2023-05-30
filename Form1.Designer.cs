@@ -61,25 +61,31 @@
             MouseCoordsValue = new ToolStripStatusLabel();
             DocSize = new ToolStripStatusLabel();
             DocSizeValue = new ToolStripStatusLabel();
+            FontValue = new ToolStripStatusLabel();
+            FontSize = new ToolStripStatusLabel();
             toolStrip1 = new ToolStrip();
-            toolStripButton1 = new ToolStripButton();
+            NewFile = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
-            toolStripButton2 = new ToolStripButton();
+            SaveFile = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
             toolStripButton3 = new ToolStripButton();
             toolStripSeparator3 = new ToolStripSeparator();
-            toolStripButton4 = new ToolStripButton();
+            Thickness = new ToolStripButton();
             toolStripSeparator4 = new ToolStripSeparator();
-            toolStripButton5 = new ToolStripButton();
+            LineColor = new ToolStripButton();
             toolStripSeparator7 = new ToolStripSeparator();
-            toolStripButton11 = new ToolStripButton();
+            Fill = new ToolStripButton();
             toolStripSeparator5 = new ToolStripSeparator();
-            toolStripButton6 = new ToolStripButton();
+            Size = new ToolStripButton();
             toolStripSeparator6 = new ToolStripSeparator();
             toolStripButton7 = new ToolStripButton();
             toolStripButton8 = new ToolStripButton();
             toolStripButton9 = new ToolStripButton();
             toolStripButton10 = new ToolStripButton();
+            toolStripSeparator8 = new ToolStripSeparator();
+            Font = new ToolStripButton();
+            StandardFont = new ToolStripButton();
+            TextButton = new ToolStripButton();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
@@ -236,7 +242,7 @@
             // 
             statusStrip1.BackColor = Color.White;
             statusStrip1.ImageScalingSize = new Size(18, 18);
-            statusStrip1.Items.AddRange(new ToolStripItem[] { PenSize, PenSizeValue, PenColor, PenColorValue, FillColor, FillColorValue, MouseCoords, MouseCoordsValue, DocSize, DocSizeValue });
+            statusStrip1.Items.AddRange(new ToolStripItem[] { PenSize, PenSizeValue, PenColor, PenColorValue, FillColor, FillColorValue, MouseCoords, MouseCoordsValue, DocSize, DocSizeValue, FontValue, FontSize });
             statusStrip1.Location = new Point(0, 701);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.RenderMode = ToolStripRenderMode.Professional;
@@ -313,41 +319,54 @@
             DocSizeValue.Size = new Size(47, 21);
             DocSizeValue.Text = " -- : -- ";
             // 
+            // FontValue
+            // 
+            FontValue.Name = "FontValue";
+            FontValue.Size = new Size(109, 21);
+            FontValue.Text = "TimesNewRoman";
+            FontValue.Visible = false;
+            // 
+            // FontSize
+            // 
+            FontSize.Name = "FontSize";
+            FontSize.Size = new Size(0, 21);
+            FontSize.Visible = false;
+            // 
             // toolStrip1
             // 
             toolStrip1.BackColor = Color.WhiteSmoke;
             toolStrip1.ImageScalingSize = new Size(50, 50);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripSeparator1, toolStripButton2, toolStripSeparator2, toolStripButton3, toolStripSeparator3, toolStripButton4, toolStripSeparator4, toolStripButton5, toolStripSeparator7, toolStripButton11, toolStripSeparator5, toolStripButton6, toolStripSeparator6, toolStripButton7, toolStripButton8, toolStripButton9, toolStripButton10 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { NewFile, toolStripSeparator1, SaveFile, toolStripSeparator2, toolStripButton3, toolStripSeparator3, Thickness, toolStripSeparator4, LineColor, toolStripSeparator7, Fill, toolStripSeparator5, Size, toolStripSeparator6, toolStripButton7, toolStripButton8, toolStripButton9, toolStripButton10, toolStripSeparator8, Font, StandardFont, TextButton });
             toolStrip1.Location = new Point(0, 25);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1008, 57);
             toolStrip1.TabIndex = 5;
             toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // NewFile
             // 
-            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
-            toolStripButton1.ImageTransparentColor = Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(54, 54);
-            toolStripButton1.Text = "toolStripButton1";
-            toolStripButton1.Click += toolStripButton1_Click;
+            NewFile.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            NewFile.Image = (Image)resources.GetObject("NewFile.Image");
+            NewFile.ImageTransparentColor = Color.Magenta;
+            NewFile.Name = "NewFile";
+            NewFile.Size = new Size(54, 54);
+            NewFile.Text = "toolStripButton1";
+            NewFile.Click += toolStripButton1_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new Size(6, 57);
             // 
-            // toolStripButton2
+            // SaveFile
             // 
-            toolStripButton2.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton2.Image = (Image)resources.GetObject("toolStripButton2.Image");
-            toolStripButton2.ImageTransparentColor = Color.Magenta;
-            toolStripButton2.Name = "toolStripButton2";
-            toolStripButton2.Size = new Size(54, 54);
-            toolStripButton2.Text = "toolStripButton2";
-            toolStripButton2.Click += toolStripButton2_Click;
+            SaveFile.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            SaveFile.Image = (Image)resources.GetObject("SaveFile.Image");
+            SaveFile.ImageTransparentColor = Color.Magenta;
+            SaveFile.Name = "SaveFile";
+            SaveFile.Size = new Size(54, 54);
+            SaveFile.Text = "toolStripButton2";
+            SaveFile.Click += toolStripButton2_Click;
             // 
             // toolStripSeparator2
             // 
@@ -369,61 +388,61 @@
             toolStripSeparator3.Name = "toolStripSeparator3";
             toolStripSeparator3.Size = new Size(6, 57);
             // 
-            // toolStripButton4
+            // Thickness
             // 
-            toolStripButton4.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton4.Image = (Image)resources.GetObject("toolStripButton4.Image");
-            toolStripButton4.ImageTransparentColor = Color.Magenta;
-            toolStripButton4.Name = "toolStripButton4";
-            toolStripButton4.Size = new Size(54, 54);
-            toolStripButton4.Text = "toolStripButton4";
-            toolStripButton4.Click += toolStripButton4_Click;
+            Thickness.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            Thickness.Image = (Image)resources.GetObject("Thickness.Image");
+            Thickness.ImageTransparentColor = Color.Magenta;
+            Thickness.Name = "Thickness";
+            Thickness.Size = new Size(54, 54);
+            Thickness.Text = "toolStripButton4";
+            Thickness.Click += toolStripButton4_Click;
             // 
             // toolStripSeparator4
             // 
             toolStripSeparator4.Name = "toolStripSeparator4";
             toolStripSeparator4.Size = new Size(6, 57);
             // 
-            // toolStripButton5
+            // LineColor
             // 
-            toolStripButton5.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton5.Image = (Image)resources.GetObject("toolStripButton5.Image");
-            toolStripButton5.ImageTransparentColor = Color.Magenta;
-            toolStripButton5.Name = "toolStripButton5";
-            toolStripButton5.Size = new Size(54, 54);
-            toolStripButton5.Text = "toolStripButton5";
-            toolStripButton5.Click += toolStripButton5_Click;
+            LineColor.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            LineColor.Image = (Image)resources.GetObject("LineColor.Image");
+            LineColor.ImageTransparentColor = Color.Magenta;
+            LineColor.Name = "LineColor";
+            LineColor.Size = new Size(54, 54);
+            LineColor.Text = "toolStripButton5";
+            LineColor.Click += toolStripButton5_Click;
             // 
             // toolStripSeparator7
             // 
             toolStripSeparator7.Name = "toolStripSeparator7";
             toolStripSeparator7.Size = new Size(6, 57);
             // 
-            // toolStripButton11
+            // Fill
             // 
-            toolStripButton11.BackColor = Color.WhiteSmoke;
-            toolStripButton11.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton11.Image = (Image)resources.GetObject("toolStripButton11.Image");
-            toolStripButton11.ImageTransparentColor = Color.Magenta;
-            toolStripButton11.Name = "toolStripButton11";
-            toolStripButton11.Size = new Size(54, 54);
-            toolStripButton11.Text = "toolStripButton11";
-            toolStripButton11.Click += toolStripButton11_Click;
+            Fill.BackColor = Color.WhiteSmoke;
+            Fill.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            Fill.Image = (Image)resources.GetObject("Fill.Image");
+            Fill.ImageTransparentColor = Color.Magenta;
+            Fill.Name = "Fill";
+            Fill.Size = new Size(54, 54);
+            Fill.Text = "toolStripButton11";
+            Fill.Click += toolStripButton11_Click;
             // 
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
             toolStripSeparator5.Size = new Size(6, 57);
             // 
-            // toolStripButton6
+            // Size
             // 
-            toolStripButton6.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton6.Image = (Image)resources.GetObject("toolStripButton6.Image");
-            toolStripButton6.ImageTransparentColor = Color.Magenta;
-            toolStripButton6.Name = "toolStripButton6";
-            toolStripButton6.Size = new Size(54, 54);
-            toolStripButton6.Text = "toolStripButton6";
-            toolStripButton6.Click += toolStripButton6_Click;
+            Size.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            Size.Image = (Image)resources.GetObject("Size.Image");
+            Size.ImageTransparentColor = Color.Magenta;
+            Size.Name = "Size";
+            Size.Size = new Size(54, 54);
+            Size.Text = "toolStripButton6";
+            Size.Click += toolStripButton6_Click;
             // 
             // toolStripSeparator6
             // 
@@ -475,6 +494,40 @@
             toolStripButton10.Size = new Size(54, 54);
             toolStripButton10.Text = "toolStripButton10";
             toolStripButton10.Click += toolStripButton10_Click;
+            // 
+            // toolStripSeparator8
+            // 
+            toolStripSeparator8.Name = "toolStripSeparator8";
+            toolStripSeparator8.Size = new Size(6, 57);
+            // 
+            // Font
+            // 
+            Font.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            Font.Image = (Image)resources.GetObject("Font.Image");
+            Font.ImageTransparentColor = Color.Magenta;
+            Font.Name = "Font";
+            Font.Size = new Size(54, 54);
+            Font.Text = "toolStripButton12";
+            Font.Click += Font_Click;
+            // 
+            // StandardFont
+            // 
+            StandardFont.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            StandardFont.Image = (Image)resources.GetObject("StandardFont.Image");
+            StandardFont.ImageTransparentColor = Color.Magenta;
+            StandardFont.Name = "StandardFont";
+            StandardFont.Size = new Size(54, 54);
+            StandardFont.Text = "toolStripButton13";
+            // 
+            // TextButton
+            // 
+            TextButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TextButton.Image = (Image)resources.GetObject("TextButton.Image");
+            TextButton.ImageTransparentColor = Color.Magenta;
+            TextButton.Name = "TextButton";
+            TextButton.Size = new Size(54, 54);
+            TextButton.Text = "toolStripButton14";
+            TextButton.Click += TextButton_Click;
             // 
             // Form1
             // 
@@ -529,19 +582,19 @@
         private ToolStripStatusLabel PenSizeValue;
         private ToolStripStatusLabel PenColor;
         private ToolStrip toolStrip1;
-        private ToolStripButton toolStripButton1;
+        private ToolStripButton NewFile;
         private ToolStripSeparator toolStripSeparator1;
-        private ToolStripButton toolStripButton2;
+        private ToolStripButton SaveFile;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripButton toolStripButton3;
         private ToolStripSeparator toolStripSeparator3;
-        private ToolStripButton toolStripButton4;
+        private ToolStripButton Thickness;
         private ToolStripSeparator toolStripSeparator4;
-        private ToolStripButton toolStripButton5;
+        private ToolStripButton LineColor;
         private ToolStripSeparator toolStripSeparator7;
-        private ToolStripButton toolStripButton11;
+        private ToolStripButton Fill;
         private ToolStripSeparator toolStripSeparator5;
-        private ToolStripButton toolStripButton6;
+        private ToolStripButton Size;
         private ToolStripSeparator toolStripSeparator6;
         private ToolStripButton toolStripButton7;
         private ToolStripButton toolStripButton8;
@@ -554,5 +607,11 @@
         private ToolStripStatusLabel MouseCoordsValue;
         private ToolStripStatusLabel DocSize;
         private ToolStripStatusLabel DocSizeValue;
+        private ToolStripSeparator toolStripSeparator8;
+        private ToolStripButton Font;
+        private ToolStripButton StandardFont;
+        private ToolStripButton TextButton;
+        private ToolStripStatusLabel FontValue;
+        private ToolStripStatusLabel FontSize;
     }
 }

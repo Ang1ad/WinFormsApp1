@@ -24,6 +24,7 @@ namespace WinFormsApp1
         public Color paramDashColor = Color.Gray;
         public int paramThickness = 1;
         public bool paramIsFill = false;
+        public Font font, defaultFont;
 
         public int figureNumber = 1;
         public Figure figure;
@@ -180,6 +181,7 @@ namespace WinFormsApp1
             toolStripButton8.Checked = false;
             toolStripButton9.Checked = false;
             toolStripButton10.Checked = false;
+            TextButton.Checked = false;
             цветЗаливкиToolStripMenuItem.Enabled = true;
             режимЗаливкиToolStripMenuItem.Enabled = true;
             figureNumber = 1;
@@ -194,6 +196,7 @@ namespace WinFormsApp1
             toolStripButton7.Checked = false;
             toolStripButton9.Checked = false;
             toolStripButton10.Checked = false;
+            TextButton.Checked = false;
             цветЗаливкиToolStripMenuItem.Enabled = true;
             режимЗаливкиToolStripMenuItem.Enabled = true;
             figureNumber = 2;
@@ -218,6 +221,7 @@ namespace WinFormsApp1
             toolStripButton7.Checked = false;
             toolStripButton8.Checked = false;
             toolStripButton10.Checked = false;
+            TextButton.Checked = false;
             цветЗаливкиToolStripMenuItem.Enabled = false;
             режимЗаливкиToolStripMenuItem.Enabled = false;
             режимЗаливкиToolStripMenuItem.Checked = false;
@@ -233,6 +237,7 @@ namespace WinFormsApp1
             toolStripButton7.Checked = false;
             toolStripButton8.Checked = false;
             toolStripButton9.Checked = false;
+            TextButton.Checked = false;
             цветЗаливкиToolStripMenuItem.Enabled = false;
             режимЗаливкиToolStripMenuItem.Enabled = false;
             режимЗаливкиToolStripMenuItem.Checked = false;
@@ -246,9 +251,9 @@ namespace WinFormsApp1
 
         private void toolStripButton6_Click(object sender, EventArgs e) //размер окна
         {
-            if (toolStripButton6.Checked = true)
+            if (Size.Checked = true)
             {
-                toolStripButton6.Checked = !toolStripButton6.Checked;
+                Size.Checked = !Size.Checked;
             }
             else
             {
@@ -258,7 +263,7 @@ namespace WinFormsApp1
                 {
                     Form f = new Form2(size.size);
                 }
-                toolStripButton6.Checked = !toolStripButton6.Checked;
+                Size.Checked = !Size.Checked;
             }
         }
 
@@ -344,18 +349,18 @@ namespace WinFormsApp1
 
         private void toolStripButton11_Click(object sender, EventArgs e) // заливка
         {
-            if (toolStripButton11.Checked)
+            if (Fill.Checked)
             {
                 выклToolStripMenuItem.Checked = true;
                 вклToolStripMenuItem.Checked = !выклToolStripMenuItem.Checked;
                 paramIsFill = вклToolStripMenuItem.Checked;
-                toolStripButton11.Checked = false;
+                Fill.Checked = false;
             }
             else
             {
                 changeColor(ref paramFillColor, ref FillColorValue);
-                toolStripButton11.Checked = !toolStripButton11.Checked;
-                вклToolStripMenuItem.Checked = toolStripButton11.Checked;
+                Fill.Checked = !Fill.Checked;
+                вклToolStripMenuItem.Checked = Fill.Checked;
                 выклToolStripMenuItem.Checked = !вклToolStripMenuItem.Checked;
                 paramIsFill = вклToolStripMenuItem.Checked;
             }
@@ -400,6 +405,52 @@ namespace WinFormsApp1
         public void ChangeMouseCoordsValue(MouseEventArgs e)
         {
             MouseCoordsValue.Text = "  " + e.X.ToString() + " ; " + e.Y.ToString() + "  ";
+        }
+
+        private void Font_Click(object sender, EventArgs e)
+        {
+            FontDialog fontDialog = new FontDialog();
+            DialogResult result = fontDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                font = fontDialog.Font;
+            }
+        }
+
+        private void TextButton_Click(object sender, EventArgs e)
+        {
+            ChooseText();
+        }
+
+        public void drawFontType(Font f, bool delete = false)
+        {
+            if (!delete)
+            {
+                FontValue.Text = "Шрифт:" + f.Name;
+                FontSize.Text = "  Размер шрифта:" + f.Size;
+            }
+            else
+            {
+                FontValue.Text = String.Empty;
+                FontSize.Text = String.Empty;
+            }
+        }
+
+        public void ChooseText()
+        {
+            TextButton.Checked = !TextButton.Checked;
+            криваяToolStripMenuItem.Checked = false;
+            прямоугольникToolStripMenuItem.Checked = false;
+            эллипсToolStripMenuItem.Checked = false;
+            прямаяToolStripMenuItem.Checked = false;
+            toolStripButton10.Checked = false;
+            toolStripButton7.Checked = false;
+            toolStripButton8.Checked = false;
+            toolStripButton9.Checked = false;
+            цветЗаливкиToolStripMenuItem.Enabled = false;
+            режимЗаливкиToolStripMenuItem.Enabled = false;
+            режимЗаливкиToolStripMenuItem.Checked = false;
+            figureNumber = 5;
         }
     }
 }

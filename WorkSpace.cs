@@ -69,6 +69,14 @@ namespace WinFormsApp1
                     dashColor: ((Form1)ParentForm.ParentForm).paramDashColor,
                     thickness: ((Form1)ParentForm.ParentForm).paramThickness);
                         break;
+                    case 5:
+                        ((Form1)ParentForm.ParentForm).figure = new Text(point1, point2,
+                    lineColor: ((Form1)ParentForm.ParentForm).paramLineColor,
+                    dashColor: ((Form1)ParentForm.ParentForm).paramDashColor,
+                    thickness: ((Form1)ParentForm.ParentForm).paramThickness,
+                    font: ((Form1)ParentForm.ParentForm).defaultFont,
+                    parent: ((Form1)ParentForm.ParentForm));
+                        break;
                 }
             }
         }
