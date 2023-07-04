@@ -77,7 +77,7 @@ namespace WinFormsApp1
         {
             ((Form1)ParentForm.ParentForm).ChangeMouseCoordsValue(e);
             if (draw)
-            {
+            { //add type of figure
                 //((Form1)ParentForm.ParentForm).figure.Hide(g);
                 buffer.Render(g);
                 buffer.Graphics.FillRectangle(new SolidBrush(Color.White), DisplayRectangle);

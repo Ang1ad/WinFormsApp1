@@ -155,16 +155,13 @@ namespace WinFormsApp1
 
         private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-
+            ChooseTextBox();
         }
 
         private void toolStripStatusLabel2_Click(object sender, EventArgs e)
         {
 
         }
-
-        //StatusStrip statusBar = new StatusStrip();
-        //Graphics graphicsStatusBar;
 
         private void toolStripButton7_Click(object sender, EventArgs e)
         {
@@ -177,6 +174,7 @@ namespace WinFormsApp1
             криваяToolStripMenuItem.Checked = false;
             эллипсToolStripMenuItem.Checked = false;
             прямаяToolStripMenuItem.Checked = false;
+            текстToolStripMenuItem.Checked = false;
             toolStripButton8.Checked = false;
             toolStripButton9.Checked = false;
             toolStripButton10.Checked = false;
@@ -191,6 +189,7 @@ namespace WinFormsApp1
             прямоугольникToolStripMenuItem.Checked = false;
             криваяToolStripMenuItem.Checked = false;
             прямаяToolStripMenuItem.Checked = false;
+            текстToolStripMenuItem.Checked = false;
             toolStripButton7.Checked = false;
             toolStripButton9.Checked = false;
             toolStripButton10.Checked = false;
@@ -215,6 +214,7 @@ namespace WinFormsApp1
             прямоугольникToolStripMenuItem.Checked = false;
             эллипсToolStripMenuItem.Checked = false;
             криваяToolStripMenuItem.Checked = false;
+            текстToolStripMenuItem.Checked = false;
             toolStripButton7.Checked = false;
             toolStripButton8.Checked = false;
             toolStripButton10.Checked = false;
@@ -230,6 +230,7 @@ namespace WinFormsApp1
             прямоугольникToolStripMenuItem.Checked = false;
             эллипсToolStripMenuItem.Checked = false;
             прямаяToolStripMenuItem.Checked = false;
+            текстToolStripMenuItem.Checked = false;
             toolStripButton7.Checked = false;
             toolStripButton8.Checked = false;
             toolStripButton9.Checked = false;
@@ -237,6 +238,22 @@ namespace WinFormsApp1
             режимЗаливкиToolStripMenuItem.Enabled = false;
             режимЗаливкиToolStripMenuItem.Checked = false;
             figureNumber = 4;
+        }
+
+        public void ChooseTextBox()
+        {
+            текстToolStripMenuItem.Checked = !текстToolStripMenuItem.Checked;
+            криваяToolStripMenuItem.Checked = false;
+            прямоугольникToolStripMenuItem.Checked = false;
+            эллипсToolStripMenuItem.Checked = false;
+            прямаяToolStripMenuItem.Checked = false;
+            toolStripButton7.Checked = false;
+            toolStripButton8.Checked = false;
+            toolStripButton9.Checked = false;
+            цветЗаливкиToolStripMenuItem.Enabled = false;
+            режимЗаливкиToolStripMenuItem.Enabled = false;
+            режимЗаливкиToolStripMenuItem.Checked = false;
+            figureNumber = 5;
         }
 
         private void toolStripButton10_Click(object sender, EventArgs e) //кривая
@@ -372,8 +389,6 @@ namespace WinFormsApp1
                 SaveAs((Form2)ActiveMdiChild);
             }
         }
-        //Кнопка размера рисунка
-        //Нижняя панель
 
         public void ChangeLabelColor(Color color, ref ToolStripStatusLabel label)
         {
@@ -400,6 +415,21 @@ namespace WinFormsApp1
         public void ChangeMouseCoordsValue(MouseEventArgs e)
         {
             MouseCoordsValue.Text = "  " + e.X.ToString() + " ; " + e.Y.ToString() + "  ";
+        }
+
+        private void toolStripTextBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void текстToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButton12_Click(object sender, EventArgs e)
+        {
+            ChooseTextBox();
         }
     }
 }

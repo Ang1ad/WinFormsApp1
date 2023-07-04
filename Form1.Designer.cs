@@ -48,6 +48,7 @@
             эллипсToolStripMenuItem = new ToolStripMenuItem();
             прямаяToolStripMenuItem = new ToolStripMenuItem();
             криваяToolStripMenuItem = new ToolStripMenuItem();
+            текстToolStripMenuItem = new ToolStripMenuItem();
             saveFileDialog1 = new SaveFileDialog();
             openFileDialog1 = new OpenFileDialog();
             statusStrip1 = new StatusStrip();
@@ -80,6 +81,7 @@
             toolStripButton8 = new ToolStripButton();
             toolStripButton9 = new ToolStripButton();
             toolStripButton10 = new ToolStripButton();
+            toolStripButton12 = new ToolStripButton();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
@@ -193,7 +195,7 @@
             // 
             // фигураToolStripMenuItem
             // 
-            фигураToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { прямоугольникToolStripMenuItem, эллипсToolStripMenuItem, прямаяToolStripMenuItem, криваяToolStripMenuItem });
+            фигураToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { прямоугольникToolStripMenuItem, эллипсToolStripMenuItem, прямаяToolStripMenuItem, криваяToolStripMenuItem, текстToolStripMenuItem });
             фигураToolStripMenuItem.Name = "фигураToolStripMenuItem";
             фигураToolStripMenuItem.Size = new Size(62, 21);
             фигураToolStripMenuItem.Text = "Фигура";
@@ -227,6 +229,13 @@
             криваяToolStripMenuItem.Size = new Size(176, 24);
             криваяToolStripMenuItem.Text = "Кривая";
             криваяToolStripMenuItem.Click += криваяToolStripMenuItem_Click;
+            // 
+            // текстToolStripMenuItem
+            // 
+            текстToolStripMenuItem.Name = "текстToolStripMenuItem";
+            текстToolStripMenuItem.Size = new Size(176, 24);
+            текстToolStripMenuItem.Text = "Текст";
+            текстToolStripMenuItem.Click += текстToolStripMenuItem_Click;
             // 
             // openFileDialog1
             // 
@@ -317,7 +326,7 @@
             // 
             toolStrip1.BackColor = Color.WhiteSmoke;
             toolStrip1.ImageScalingSize = new Size(50, 50);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripSeparator1, toolStripButton2, toolStripSeparator2, toolStripButton3, toolStripSeparator3, toolStripButton4, toolStripSeparator4, toolStripButton5, toolStripSeparator7, toolStripButton11, toolStripSeparator5, toolStripButton6, toolStripSeparator6, toolStripButton7, toolStripButton8, toolStripButton9, toolStripButton10 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripSeparator1, toolStripButton2, toolStripSeparator2, toolStripButton3, toolStripSeparator3, toolStripButton4, toolStripSeparator4, toolStripButton5, toolStripSeparator7, toolStripButton11, toolStripSeparator5, toolStripButton6, toolStripSeparator6, toolStripButton7, toolStripButton8, toolStripButton9, toolStripButton10, toolStripButton12 });
             toolStrip1.Location = new Point(0, 25);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1008, 57);
@@ -476,6 +485,16 @@
             toolStripButton10.Text = "toolStripButton10";
             toolStripButton10.Click += toolStripButton10_Click;
             // 
+            // toolStripButton12
+            // 
+            toolStripButton12.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton12.Image = (Image)resources.GetObject("toolStripButton12.Image");
+            toolStripButton12.ImageTransparentColor = Color.Magenta;
+            toolStripButton12.Name = "toolStripButton12";
+            toolStripButton12.Size = new Size(54, 54);
+            toolStripButton12.Text = "toolStripButton12";
+            toolStripButton12.Click += toolStripButton12_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -554,5 +573,7 @@
         private ToolStripStatusLabel MouseCoordsValue;
         private ToolStripStatusLabel DocSize;
         private ToolStripStatusLabel DocSizeValue;
+        private ToolStripButton toolStripButton12;
+        private ToolStripMenuItem текстToolStripMenuItem;
     }
 }

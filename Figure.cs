@@ -38,6 +38,12 @@ namespace WinFormsApp1
             this.thickness = thickness;
         }
 
+        protected Figure(Point point1, Point point2)
+        {
+            this.point1 = point1;
+            this.point2 = point2;
+        }
+
         public abstract void Draw(Graphics g);
 
         public abstract void DrawDash(Graphics g);
