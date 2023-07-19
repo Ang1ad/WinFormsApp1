@@ -1,8 +1,10 @@
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.Devices;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace WinFormsApp1
 {
@@ -24,16 +26,18 @@ namespace WinFormsApp1
 
         }
 
-        private void окноToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ОкноToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void новыйToolStripMenuItem_Click(object sender, EventArgs e)
+        private void НовыйToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new Form2();
-            f.MdiParent = this;
-            f.Text = "Рисунок " + this.MdiChildren.Length.ToString();
+            Form f = new Form2
+            {
+                MdiParent = this,
+                Text = "Рисунок " + this.MdiChildren.Length.ToString()
+            };
             f.Show();
             if (!this.сохранитьКакToolStripMenuItem.Enabled)
             {
@@ -41,21 +45,22 @@ namespace WinFormsApp1
             }
         }
 
-        //Class1 class = new Class1();
-
-        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ОткрытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.InitialDirectory = Environment.CurrentDirectory;
             openFileDialog1.Filter = "JPG(*.JPG)|*.jpg";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                BinaryFormatter bf = new BinaryFormatter();
+                XmlSerializer xmlSerializer = new(typeof(Stream));
                 Stream fileStream = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
                 Form f = new Form2();
                 ((Form2)f).open = true;
                 f.MdiParent = this;
                 f.Text = openFileDialog1.FileName;
-                ((Form2)f).array = (List<Figure>)bf.Deserialize(fileStream);
+                if (((Form2)f).array != null)
+                {
+                    ((Form2)f).array = xmlSerializer.Deserialize(fileStream) as List<Figure>;
+                }
                 f.Show();
                 if (!this.сохранитьКакToolStripMenuItem.Enabled)
                 {
@@ -66,21 +71,21 @@ namespace WinFormsApp1
 
         }
 
-        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        private void СохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Save((Form2)ActiveMdiChild);
         }
 
-        private void сохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
+        private void СохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveAs((Form2)ActiveMdiChild);
         }
 
         public void Save(Form2 f)
         {
-            BinaryFormatter bf = new BinaryFormatter();
             Stream fileStream = new FileStream(ActiveMdiChild.Text, FileMode.Create, FileAccess.Write, FileShare.None);
-            bf.Serialize(fileStream, f.array);
+            XmlSerializer xmlSerializer = new(typeof(Stream));
+            xmlSerializer.Serialize(fileStream, f.array);
             f.open = true;
             f.save = false;
             fileStream.Close();
@@ -93,9 +98,9 @@ namespace WinFormsApp1
             bool result = true;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                BinaryFormatter bf = new BinaryFormatter();
+                XmlSerializer xmlSerializer = new(typeof(Stream));
                 Stream fileStream = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
-                bf.Serialize(fileStream, f.array);
+                xmlSerializer.Serialize(fileStream, f.array);
                 f.open = true;
                 f.save = false;
                 f.Text = saveFileDialog1.FileName;
@@ -105,9 +110,9 @@ namespace WinFormsApp1
             return result;
         }
 
-        private void толщинаЛинииToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ТолщинаЛинииToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ThicknessDialog thicknessDialog = new ThicknessDialog();
+            ThicknessDialog thicknessDialog = new();
             thicknessDialog.comboBox1.Text = paramThickness.ToString();
             DialogResult result = thicknessDialog.ShowDialog(this);
             if (result == DialogResult.OK)
@@ -122,20 +127,22 @@ namespace WinFormsApp1
             }
         }
 
-        private void цветЛинииToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ЦветЛинииToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            changeColor(ref paramLineColor);
+            ChangeColor(ref paramLineColor);
         }
 
-        private void цветЗаливкиToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ЦветЗаливкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            changeColor(ref paramFillColor);
+            ChangeColor(ref paramFillColor);
         }
 
-        private void changeColor(ref Color color)
+        private static void ChangeColor(ref Color color)
         {
-            ColorDialog colorDialog = new ColorDialog();
-            colorDialog.Color = color;
+            ColorDialog colorDialog = new()
+            {
+                Color = color
+            };
             DialogResult result = colorDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -143,14 +150,14 @@ namespace WinFormsApp1
             }
         }
 
-        private void выклToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ВыклToolStripMenuItem_Click(object sender, EventArgs e)
         {
             выклToolStripMenuItem.Checked = true;
             вклToolStripMenuItem.Checked = false;
             paramIsFill = вклToolStripMenuItem.Checked;
         }
 
-        private void вклToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ВклToolStripMenuItem_Click(object sender, EventArgs e)
         {
             вклToolStripMenuItem.Checked = true;
             выклToolStripMenuItem.Checked = false;

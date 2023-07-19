@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Diagnostics.CodeAnalysis;
 
 namespace WinFormsApp1
 {
@@ -21,8 +22,9 @@ namespace WinFormsApp1
         public bool draw = false;
         public bool save = false;
         public bool open = false;
-        public List<Figure> array = new List<Figure>();
-        private Graphics g;
+        [MaybeNull]
+        public List<Figure> array = new();
+        private readonly Graphics g;
         private MyRectangle rectangle;
         private Point point1;
         private Point point2;
@@ -30,6 +32,7 @@ namespace WinFormsApp1
         public Form2()
         {
             InitializeComponent();
+            g = CreateGraphics();
         }
 
         private void Form2_MouseDown(object sender, MouseEventArgs e)
@@ -37,7 +40,7 @@ namespace WinFormsApp1
             if (e.Button == MouseButtons.Left)
             {
                 draw = true;
-                g = CreateGraphics();
+                
                 point1 = new Point(e.X, e.Y);
                 point2 = new Point(e.X, e.Y);
                 rectangle = new MyRectangle(point1, point2,

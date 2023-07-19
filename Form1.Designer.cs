@@ -70,14 +70,14 @@
             новыйToolStripMenuItem.Name = "новыйToolStripMenuItem";
             новыйToolStripMenuItem.Size = new Size(177, 24);
             новыйToolStripMenuItem.Text = "Новый";
-            новыйToolStripMenuItem.Click += новыйToolStripMenuItem_Click;
+            новыйToolStripMenuItem.Click += НовыйToolStripMenuItem_Click;
             // 
             // открытьToolStripMenuItem
             // 
             открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
             открытьToolStripMenuItem.Size = new Size(177, 24);
             открытьToolStripMenuItem.Text = "Открыть";
-            открытьToolStripMenuItem.Click += открытьToolStripMenuItem_Click;
+            открытьToolStripMenuItem.Click += ОткрытьToolStripMenuItem_Click;
             // 
             // сохранитьToolStripMenuItem
             // 
@@ -85,7 +85,7 @@
             сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
             сохранитьToolStripMenuItem.Size = new Size(177, 24);
             сохранитьToolStripMenuItem.Text = "Сохранить";
-            сохранитьToolStripMenuItem.Click += сохранитьToolStripMenuItem_Click;
+            сохранитьToolStripMenuItem.Click += СохранитьToolStripMenuItem_Click;
             // 
             // сохранитьКакToolStripMenuItem
             // 
@@ -93,14 +93,14 @@
             сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
             сохранитьКакToolStripMenuItem.Size = new Size(177, 24);
             сохранитьКакToolStripMenuItem.Text = "Сохранить как...";
-            сохранитьКакToolStripMenuItem.Click += сохранитьКакToolStripMenuItem_Click;
+            сохранитьКакToolStripMenuItem.Click += СохранитьКакToolStripMenuItem_Click;
             // 
             // окноToolStripMenuItem
             // 
             окноToolStripMenuItem.Name = "окноToolStripMenuItem";
             окноToolStripMenuItem.Size = new Size(51, 21);
             окноToolStripMenuItem.Text = "Окно";
-            окноToolStripMenuItem.Click += окноToolStripMenuItem_Click;
+            окноToolStripMenuItem.Click += ОкноToolStripMenuItem_Click;
             // 
             // параметрыToolStripMenuItem
             // 
@@ -114,21 +114,21 @@
             цветЛинииToolStripMenuItem.Name = "цветЛинииToolStripMenuItem";
             цветЛинииToolStripMenuItem.Size = new Size(198, 24);
             цветЛинииToolStripMenuItem.Text = "Цвет линии";
-            цветЛинииToolStripMenuItem.Click += цветЛинииToolStripMenuItem_Click;
+            цветЛинииToolStripMenuItem.Click += ЦветЛинииToolStripMenuItem_Click;
             // 
             // цветЗаливкиToolStripMenuItem
             // 
             цветЗаливкиToolStripMenuItem.Name = "цветЗаливкиToolStripMenuItem";
             цветЗаливкиToolStripMenuItem.Size = new Size(198, 24);
             цветЗаливкиToolStripMenuItem.Text = "Цвет заливки";
-            цветЗаливкиToolStripMenuItem.Click += цветЗаливкиToolStripMenuItem_Click;
+            цветЗаливкиToolStripMenuItem.Click += ЦветЗаливкиToolStripMenuItem_Click;
             // 
             // толщинаЛинииToolStripMenuItem
             // 
             толщинаЛинииToolStripMenuItem.Name = "толщинаЛинииToolStripMenuItem";
             толщинаЛинииToolStripMenuItem.Size = new Size(198, 24);
             толщинаЛинииToolStripMenuItem.Text = "Толщина линии";
-            толщинаЛинииToolStripMenuItem.Click += толщинаЛинииToolStripMenuItem_Click;
+            толщинаЛинииToolStripMenuItem.Click += ТолщинаЛинииToolStripMenuItem_Click;
             // 
             // режимЗаливкиToolStripMenuItem
             // 
@@ -142,7 +142,7 @@
             вклToolStripMenuItem.Name = "вклToolStripMenuItem";
             вклToolStripMenuItem.Size = new Size(198, 24);
             вклToolStripMenuItem.Text = "Вкл.";
-            вклToolStripMenuItem.Click += вклToolStripMenuItem_Click;
+            вклToolStripMenuItem.Click += ВклToolStripMenuItem_Click;
             // 
             // выклToolStripMenuItem
             // 
@@ -151,7 +151,7 @@
             выклToolStripMenuItem.Name = "выклToolStripMenuItem";
             выклToolStripMenuItem.Size = new Size(198, 24);
             выклToolStripMenuItem.Text = "Выкл.";
-            выклToolStripMenuItem.Click += выклToolStripMenuItem_Click;
+            выклToolStripMenuItem.Click += ВыклToolStripMenuItem_Click;
             // 
             // openFileDialog1
             // 
