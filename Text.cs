@@ -72,9 +72,9 @@ namespace WinFormsApp1
                 ) return true;
             return false;
         }
-        public void Click(object sender, KeyEventArgs e, TextBox? textBox)
+        public void Click(object sender, KeyEventArgs e)
         {
-            textBox = sender as TextBox;
+            TextBox textBox = (TextBox)sender;
             if (e.KeyCode == Keys.Enter)
             {
                 if (textBox != null) 
