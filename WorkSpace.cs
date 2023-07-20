@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,7 +27,7 @@ namespace WinFormsApp1
         public BufferedGraphicsContext bufferContext;
 
         public bool draw = false;
-        public List<Figure> array = new List<Figure>();
+        public List<Figure> array = new();
         private Point point1;
         private Point point2;
 
@@ -34,50 +35,50 @@ namespace WinFormsApp1
         {
             if (e.Button == MouseButtons.Left)
             {
-                
                 draw = true;
-                //g = CreateGraphics();
                 point1 = new Point(e.X, e.Y);
                 point2 = new Point(e.X, e.Y);
-                switch (((Form1)ParentForm.ParentForm).figureNumber)
+                if (((Form1)ParentForm.ParentForm).figureType == Form1.Figures.Rectangle)
                 {
-                    case 1:
-                        ((Form1)ParentForm.ParentForm).figure = new MyRectangle(point1, point2,
+                    ((Form1)ParentForm.ParentForm).figure = new MyRectangle(point1, point2,
                     lineColor: ((Form1)ParentForm.ParentForm).paramLineColor,
                     fillColor: ((Form1)ParentForm.ParentForm).paramFillColor,
                     dashColor: ((Form1)ParentForm.ParentForm).paramDashColor,
                     thickness: ((Form1)ParentForm.ParentForm).paramThickness,
                     isFill: ((Form1)ParentForm.ParentForm).paramIsFill);
-                        break;
-                    case 2:
-                        ((Form1)ParentForm.ParentForm).figure = new Ellipse(point1, point2,
+                }
+                else if (((Form1)ParentForm.ParentForm).figureType == Form1.Figures.Ellipse)
+                {
+                    ((Form1)ParentForm.ParentForm).figure = new Ellipse(point1, point2,
                     lineColor: ((Form1)ParentForm.ParentForm).paramLineColor,
                     fillColor: ((Form1)ParentForm.ParentForm).paramFillColor,
                     dashColor: ((Form1)ParentForm.ParentForm).paramDashColor,
                     thickness: ((Form1)ParentForm.ParentForm).paramThickness,
                     isFill: ((Form1)ParentForm.ParentForm).paramIsFill);
-                        break;
-                    case 3:
-                        ((Form1)ParentForm.ParentForm).figure = new Line(point1, point2,
+                }    
+                else if (((Form1)ParentForm.ParentForm).figureType == Form1.Figures.Line)
+                {
+                    ((Form1)ParentForm.ParentForm).figure = new Line(point1, point2,
                     lineColor: ((Form1)ParentForm.ParentForm).paramLineColor,
                     dashColor: ((Form1)ParentForm.ParentForm).paramDashColor,
                     thickness: ((Form1)ParentForm.ParentForm).paramThickness);
-                        break;
-                    case 4:
-                        ((Form1)ParentForm.ParentForm).figure = new Curve(point1, point2,
+                }     
+                else if (((Form1)ParentForm.ParentForm).figureType == Form1.Figures.Curve)
+                {
+                    ((Form1)ParentForm.ParentForm).figure = new Curve(point1, point2,
                     lineColor: ((Form1)ParentForm.ParentForm).paramLineColor,
                     dashColor: ((Form1)ParentForm.ParentForm).paramDashColor,
                     thickness: ((Form1)ParentForm.ParentForm).paramThickness);
-                        break;
-                    case 5:
-                        ((Form1)ParentForm.ParentForm).figure = new Text(point1, point2,
+                }      
+                else if (((Form1)ParentForm.ParentForm).figureType == Form1.Figures.Text)
+                {
+                    ((Form1)ParentForm.ParentForm).figure = new Text(point1, point2,
                     lineColor: ((Form1)ParentForm.ParentForm).paramLineColor,
                     dashColor: ((Form1)ParentForm.ParentForm).paramDashColor,
                     thickness: ((Form1)ParentForm.ParentForm).paramThickness,
                     font: ((Form1)ParentForm.ParentForm).defaultFont,
                     parent: ((Form1)ParentForm.ParentForm));
-                        break;
-                }
+                }       
             }
         }
 
@@ -86,7 +87,6 @@ namespace WinFormsApp1
             ((Form1)ParentForm.ParentForm).ChangeMouseCoordsValue(e);
             if (draw)
             {
-                //((Form1)ParentForm.ParentForm).figure.Hide(g);
                 buffer.Render(g);
                 buffer.Graphics.FillRectangle(new SolidBrush(Color.White), DisplayRectangle);
                 foreach (Figure f in array)
@@ -117,21 +117,17 @@ namespace WinFormsApp1
                 f.Draw(e.Graphics);
             }
             buffer.Render(e.Graphics);
-            /*Rectangle rectangle = new Rectangle();
-            rectangle.Offset(new Point(1, 2));
-            g.DrawRectangle(new Pen(Color.Black), rectangle); */
         }
 
         private void WorkSpace_MouseUp(object sender, MouseEventArgs e)
         {
             if (draw && e.Button == MouseButtons.Left)
             {
-                if (((Form1)ParentForm.ParentForm).figure.inBorder(Size))
+                if (((Form1)ParentForm.ParentForm).figure.InBorder(Size))
                 {
                     buffer.Render(g);
                     ((Form1)ParentForm.ParentForm).figure.Draw(buffer.Graphics);
                     array.Add(((Form1)ParentForm.ParentForm).figure);
-
                     if (!((Form2)ParentForm).save)
                     {
                         if (((Form2)ParentForm).open)
@@ -144,7 +140,6 @@ namespace WinFormsApp1
                 else
                 {
                     buffer.Render(g);
-                    //((Form1)ParentForm.ParentForm).figure.Hide(g);
                 }
                 draw = false;
                 Invalidate();
@@ -156,10 +151,8 @@ namespace WinFormsApp1
             bufferContext = BufferedGraphicsManager.Current;
             bufferContext.MaximumBuffer = SystemInformation.PrimaryMonitorMaximizedWindowSize;
             g = CreateGraphics();
-            Rectangle display = new Rectangle(0, 0, Size.Width, Size.Height);
+            Rectangle display = new(0, 0, Size.Width, Size.Height);
             buffer = bufferContext.Allocate(g, display);
-            //((Form2)ParentForm).workSpace.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            //((Form2)ParentForm).workSpace.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
     }
 }

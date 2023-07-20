@@ -19,7 +19,9 @@ namespace WinFormsApp1
     public partial class Form2 : Form
     {
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public Form2(Size size)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             InitializeComponent();
             ClientSize = size;

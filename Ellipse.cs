@@ -14,11 +14,11 @@ namespace WinFormsApp1
 
         public override void Draw(Graphics g)
         {
-            Pen pen = new Pen(lineColor, thickness);
+            Pen pen = new(lineColor, thickness);
             Rectangle rectangle = Rectangle.FromLTRB(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y), Math.Max(point1.X, point2.X), Math.Max(point1.Y, point2.Y));
             if (isFill) 
             {
-                SolidBrush brush = new SolidBrush(fillColor);
+                SolidBrush brush = new(fillColor);
                 g.FillEllipse(brush, rectangle);
             }
             g.DrawEllipse(pen, rectangle);
@@ -26,20 +26,22 @@ namespace WinFormsApp1
 
         public override void DrawDash(Graphics g)
         {
-            Pen pen = new Pen(dashColor, thickness);
-            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            Pen pen = new(dashColor, thickness)
+            {
+                DashStyle = System.Drawing.Drawing2D.DashStyle.Dash
+            };
             Rectangle rectangle = Rectangle.FromLTRB(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y), Math.Max(point1.X, point2.X), Math.Max(point1.Y, point2.Y));
             g.DrawEllipse(pen, rectangle);
         }
 
         public override void Hide(Graphics g)
         {
-            Pen pen = new Pen(Color.White, thickness);
+            Pen pen = new(Color.White, thickness);
             Rectangle rectangle = Rectangle.FromLTRB(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y), Math.Max(point1.X, point2.X), Math.Max(point1.Y, point2.Y));
             g.DrawEllipse (pen, rectangle);
         }
 
-        public override bool inBorder(Size size)
+        public override bool InBorder(Size size)
         {
             if (
                 point1.X >= 0 && point1.X <= size.Width &&

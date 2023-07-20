@@ -5,12 +5,12 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace WinFormsApp1
 {
     public partial class Form1 : Form
     {
-
         public Form1()
         {
             InitializeComponent();
@@ -26,7 +26,16 @@ namespace WinFormsApp1
         public bool paramIsFill = false;
         public Font font, defaultFont;
 
-        public int figureNumber = 1;
+        public enum Figures
+        {
+            Rectangle,
+            Ellipse,
+            Line,
+            Curve,
+            Text
+        }
+
+        public Figures figureType;
         public Figure figure;
 
         private void Form1_Load(object sender, EventArgs e)
@@ -34,38 +43,38 @@ namespace WinFormsApp1
 
         }
 
-        private void окноToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ОкноToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void новыйToolStripMenuItem_Click(object sender, EventArgs e)
+        private void НовыйToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CreateFile();
         }
 
-        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ОткрытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFile();
 
         }
 
-        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        private void СохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Save((Form2)ActiveMdiChild);
         }
 
-        private void сохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
+        private void СохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveAs((Form2)ActiveMdiChild);
         }
 
         public void Save(Form2 f)
         {
-            BinaryFormatter bf = new BinaryFormatter();
+            XmlSerializer xmlSerializer = new(typeof(Stream));
             Stream fileStream = new FileStream(ActiveMdiChild.Text, FileMode.Create, FileAccess.Write, FileShare.None);
-            SaveData saveData = new SaveData(f.workSpace.Size, f.workSpace.array);
-            bf.Serialize(fileStream, saveData);
+            SaveData saveData = new(f.workSpace.Size, f.workSpace.array);
+            xmlSerializer.Serialize(fileStream, saveData);
             f.open = true;
             f.save = false;
             fileStream.Close();
@@ -78,10 +87,10 @@ namespace WinFormsApp1
             bool result = true;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                BinaryFormatter bf = new BinaryFormatter();
+                XmlSerializer xmlSerializer = new(typeof(Stream));
                 Stream fileStream = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
-                SaveData saveData = new SaveData(f.workSpace.Size, f.workSpace.array);
-                bf.Serialize(fileStream, saveData);
+                SaveData saveData = new(f.workSpace.Size, f.workSpace.array);
+                xmlSerializer.Serialize(fileStream, saveData);
                 f.open = true;
                 f.save = false;
                 f.Text = saveFileDialog1.FileName;
@@ -91,27 +100,29 @@ namespace WinFormsApp1
             return result;
         }
 
-        private void толщинаЛинииToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ТолщинаЛинииToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ChangeThickness();
         }
 
-        private void цветЛинииToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ЦветЛинииToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            changeColor(ref paramLineColor, ref PenColorValue);
+            ChangeColor(ref paramLineColor, ref PenColorValue);
             PenColorValue.BackColor = paramLineColor;
         }
 
-        private void цветЗаливкиToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ЦветЗаливкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            changeColor(ref paramFillColor, ref FillColorValue);
+            ChangeColor(ref paramFillColor, ref FillColorValue);
             FillColorValue.BackColor = paramFillColor;
         }
 
-        private void changeColor(ref Color color, ref ToolStripStatusLabel label)
+        private static void ChangeColor(ref Color color, ref ToolStripStatusLabel label)
         {
-            ColorDialog colorDialog = new ColorDialog();
-            colorDialog.Color = color;
+            ColorDialog colorDialog = new()
+            {
+                Color = color
+            };
             DialogResult result = colorDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -120,54 +131,51 @@ namespace WinFormsApp1
             }
         }
 
-        private void выклToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ВыклToolStripMenuItem_Click(object sender, EventArgs e)
         {
             выклToolStripMenuItem.Checked = true;
             вклToolStripMenuItem.Checked = false;
             paramIsFill = вклToolStripMenuItem.Checked;
         }
 
-        private void вклToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ВклToolStripMenuItem_Click(object sender, EventArgs e)
         {
             вклToolStripMenuItem.Checked = true;
             выклToolStripMenuItem.Checked = false;
             paramIsFill = вклToolStripMenuItem.Checked;
         }
 
-        private void прямоугольникToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ПрямоугольникToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ChooseRectangle();
         }
 
-        private void эллипсToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ЭллипсToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ChooseEllipse();
         }
 
-        private void прямаяToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ПрямаяToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ChooseLine();
         }
 
-        private void криваяToolStripMenuItem_Click(object sender, EventArgs e)
+        private void КриваяToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ChooseCurve();
         }
 
-        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void StatusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
         }
 
-        private void toolStripStatusLabel2_Click(object sender, EventArgs e)
+        private void ToolStripStatusLabel2_Click(object sender, EventArgs e)
         {
 
         }
 
-        //StatusStrip statusBar = new StatusStrip();
-        //Graphics graphicsStatusBar;
-
-        private void toolStripButton7_Click(object sender, EventArgs e)
+        private void ToolStripButton7_Click(object sender, EventArgs e)
         {
             ChooseRectangle();
         }
@@ -178,13 +186,13 @@ namespace WinFormsApp1
             криваяToolStripMenuItem.Checked = false;
             эллипсToolStripMenuItem.Checked = false;
             прямаяToolStripMenuItem.Checked = false;
-            toolStripButton8.Checked = false;
-            toolStripButton9.Checked = false;
-            toolStripButton10.Checked = false;
+            EllipseStripButton.Checked = false;
+            LineStripButton.Checked = false;
+            CurveStripButton.Checked = false;
             TextButton.Checked = false;
             цветЗаливкиToolStripMenuItem.Enabled = true;
             режимЗаливкиToolStripMenuItem.Enabled = true;
-            figureNumber = 1;
+            figureType = Figures.Rectangle;
         }
 
         public void ChooseEllipse()
@@ -193,21 +201,21 @@ namespace WinFormsApp1
             прямоугольникToolStripMenuItem.Checked = false;
             криваяToolStripMenuItem.Checked = false;
             прямаяToolStripMenuItem.Checked = false;
-            toolStripButton7.Checked = false;
-            toolStripButton9.Checked = false;
-            toolStripButton10.Checked = false;
+            RectangleStripButton.Checked = false;
+            LineStripButton.Checked = false;
+            CurveStripButton.Checked = false;
             TextButton.Checked = false;
             цветЗаливкиToolStripMenuItem.Enabled = true;
             режимЗаливкиToolStripMenuItem.Enabled = true;
-            figureNumber = 2;
+            figureType = Figures.Ellipse;
         }
 
-        private void toolStripButton8_Click(object sender, EventArgs e)
+        private void ToolStripButton8_Click(object sender, EventArgs e)
         {
             ChooseEllipse();
         }
 
-        private void toolStripButton9_Click(object sender, EventArgs e)
+        private void ToolStripButton9_Click(object sender, EventArgs e)
         {
             ChooseLine();
         }
@@ -218,14 +226,14 @@ namespace WinFormsApp1
             прямоугольникToolStripMenuItem.Checked = false;
             эллипсToolStripMenuItem.Checked = false;
             криваяToolStripMenuItem.Checked = false;
-            toolStripButton7.Checked = false;
-            toolStripButton8.Checked = false;
-            toolStripButton10.Checked = false;
+            RectangleStripButton.Checked = false;
+            EllipseStripButton.Checked = false;
+            CurveStripButton.Checked = false;
             TextButton.Checked = false;
             цветЗаливкиToolStripMenuItem.Enabled = false;
             режимЗаливкиToolStripMenuItem.Enabled = false;
             режимЗаливкиToolStripMenuItem.Checked = false;
-            figureNumber = 3;
+            figureType = Figures.Line;
         }
 
         public void ChooseCurve()
@@ -234,53 +242,55 @@ namespace WinFormsApp1
             прямоугольникToolStripMenuItem.Checked = false;
             эллипсToolStripMenuItem.Checked = false;
             прямаяToolStripMenuItem.Checked = false;
-            toolStripButton7.Checked = false;
-            toolStripButton8.Checked = false;
-            toolStripButton9.Checked = false;
+            RectangleStripButton.Checked = false;
+            EllipseStripButton.Checked = false;
+            LineStripButton.Checked = false;
             TextButton.Checked = false;
             цветЗаливкиToolStripMenuItem.Enabled = false;
             режимЗаливкиToolStripMenuItem.Enabled = false;
             режимЗаливкиToolStripMenuItem.Checked = false;
-            figureNumber = 4;
+            figureType = Figures.Curve;
         }
 
-        private void toolStripButton10_Click(object sender, EventArgs e) //кривая
+        private void ToolStripButton10_Click(object sender, EventArgs e) //кривая
         {
             ChooseCurve();
         }
 
-        private void toolStripButton6_Click(object sender, EventArgs e) //размер окна
+        private void ToolStripButton6_Click(object sender, EventArgs e) //размер окна
         {
-            if (Size.Checked = true)
+            if (!(Size.Checked = true))
             {
+                FileSize size = new();
+                DialogResult result = size.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    _ = new Form2(size.size);
+                }
                 Size.Checked = !Size.Checked;
             }
             else
             {
-                FileSize size = new FileSize();
-                DialogResult result = size.ShowDialog(this);
-                if (result == DialogResult.OK)
-                {
-                    Form f = new Form2(size.size);
-                }
                 Size.Checked = !Size.Checked;
             }
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e) //создание файла
+        private void ToolStripButton1_Click(object sender, EventArgs e) //создание файла
         {
             CreateFile();
         }
 
         public void CreateFile()
         {
-            FileSize fileSize = new FileSize();
+            FileSize fileSize = new();
             DialogResult result = fileSize.ShowDialog(this);
             if (result == DialogResult.OK)
             {
-                Form f = new Form2(fileSize.size);
-                f.MdiParent = this;
-                f.Text = "Рисунок " + this.MdiChildren.Length.ToString();
+                Form f = new Form2(fileSize.size)
+                {
+                    MdiParent = this,
+                    Text = "Рисунок " + this.MdiChildren.Length.ToString()
+                };
                 if (!this.сохранитьКакToolStripMenuItem.Enabled)
                 {
                     this.сохранитьКакToolStripMenuItem.Enabled = true;
@@ -297,10 +307,12 @@ namespace WinFormsApp1
             openFileDialog1.Filter = "JPG(*.JPG)|*.jpg";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                BinaryFormatter bf = new BinaryFormatter();
+                XmlSerializer xmlSerializer = new(typeof(Stream));
                 Stream fileStream = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                SaveData data = (SaveData)bf.Deserialize(fileStream);
+                SaveData? data = xmlSerializer.Deserialize(fileStream) as SaveData;
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                 Form f = new Form2(data.size);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
                 ((Form2)f).open = true;
                 f.MdiParent = this;
                 f.Text = openFileDialog1.FileName;
@@ -314,19 +326,19 @@ namespace WinFormsApp1
             }
         }
 
-        private void toolStripButton3_Click(object sender, EventArgs e) //открытие
+        private void ToolStripButton3_Click(object sender, EventArgs e) //открытие
         {
             OpenFile();
         }
 
-        private void toolStripButton4_Click(object sender, EventArgs e) //толщина
+        private void ToolStripButton4_Click(object sender, EventArgs e) //толщина
         {
             ChangeThickness();
         }
 
         public void ChangeThickness()
         {
-            ThicknessDialog thicknessDialog = new ThicknessDialog();
+            ThicknessDialog thicknessDialog = new();
             thicknessDialog.comboBox1.Text = paramThickness.ToString();
             DialogResult result = thicknessDialog.ShowDialog(this);
             if (result == DialogResult.OK)
@@ -342,12 +354,12 @@ namespace WinFormsApp1
             }
         }
 
-        private void toolStripButton5_Click(object sender, EventArgs e) // цвет линии
+        private void ToolStripButton5_Click(object sender, EventArgs e) // цвет линии
         {
-            changeColor(ref paramLineColor, ref PenColorValue);
+            ChangeColor(ref paramLineColor, ref PenColorValue);
         }
 
-        private void toolStripButton11_Click(object sender, EventArgs e) // заливка
+        private void ToolStripButton11_Click(object sender, EventArgs e) // заливка
         {
             if (Fill.Checked)
             {
@@ -358,7 +370,7 @@ namespace WinFormsApp1
             }
             else
             {
-                changeColor(ref paramFillColor, ref FillColorValue);
+                ChangeColor(ref paramFillColor, ref FillColorValue);
                 Fill.Checked = !Fill.Checked;
                 вклToolStripMenuItem.Checked = Fill.Checked;
                 выклToolStripMenuItem.Checked = !вклToolStripMenuItem.Checked;
@@ -366,7 +378,7 @@ namespace WinFormsApp1
             }
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e) //сохранение
+        private void ToolStripButton2_Click(object sender, EventArgs e) //сохранение
         {
             if (окноToolStripMenuItem.Enabled)
             {
@@ -380,14 +392,14 @@ namespace WinFormsApp1
         //Кнопка размера рисунка
         //Нижняя панель
 
-        public void ChangeLabelColor(Color color, ref ToolStripStatusLabel label)
+        public static void ChangeLabelColor(Color color, ref ToolStripStatusLabel label)
         {
-            Bitmap Bitmap = new Bitmap(30, 20);
-            Rectangle rectangle = new Rectangle(0, 0, 30, 20);
+            Bitmap Bitmap = new(20, 30);
+            Rectangle rectangle = new(0, 0, 30, 20);
             Graphics g = Graphics.FromImage(Bitmap);
-            SolidBrush brush = new SolidBrush(color);
+            SolidBrush brush = new(color);
             g.FillRectangle(brush, rectangle);
-            Pen pen = new Pen(Color.Black, 1);
+            Pen pen = new(Color.Black, 1);
             g.DrawRectangle(pen, rectangle);
             label.BackgroundImage = Bitmap;
         }
@@ -409,7 +421,7 @@ namespace WinFormsApp1
 
         private void Font_Click(object sender, EventArgs e)
         {
-            FontDialog fontDialog = new FontDialog();
+            FontDialog fontDialog = new();
             DialogResult result = fontDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -422,7 +434,7 @@ namespace WinFormsApp1
             ChooseText();
         }
 
-        public void drawFontType(Font f, bool delete = false)
+        public void DrawFontType(Font f, bool delete = false)
         {
             if (!delete)
             {
@@ -443,14 +455,14 @@ namespace WinFormsApp1
             прямоугольникToolStripMenuItem.Checked = false;
             эллипсToolStripMenuItem.Checked = false;
             прямаяToolStripMenuItem.Checked = false;
-            toolStripButton10.Checked = false;
-            toolStripButton7.Checked = false;
-            toolStripButton8.Checked = false;
-            toolStripButton9.Checked = false;
+            CurveStripButton.Checked = false;
+            RectangleStripButton.Checked = false;
+            EllipseStripButton.Checked = false;
+            LineStripButton.Checked = false;
             цветЗаливкиToolStripMenuItem.Enabled = false;
             режимЗаливкиToolStripMenuItem.Enabled = false;
             режимЗаливкиToolStripMenuItem.Checked = false;
-            figureNumber = 5;
+            figureType = Figures.Text;
         }
     }
 }

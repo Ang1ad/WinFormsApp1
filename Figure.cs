@@ -11,6 +11,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 namespace WinFormsApp1
 {
     [Serializable()]
+
     public abstract class Figure
     {
         public Point point1, point2;
@@ -18,7 +19,7 @@ namespace WinFormsApp1
         public int thickness;
         public bool isFill;
         protected List<Point> points = new();
-        protected Font font;
+        protected Font font = new("Times New Roman", 14);
 
         protected Figure(Point point1, Point point2, Color lineColor, Color fillColor, Color dashColor, int thickness, bool isFill)
         {
@@ -56,7 +57,7 @@ namespace WinFormsApp1
 
         public abstract void Hide(Graphics g);
 
-        public abstract bool inBorder(Size size);
+        public abstract bool InBorder(Size size);
 
 
     }

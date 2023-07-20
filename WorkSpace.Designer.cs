@@ -35,6 +35,7 @@
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             DoubleBuffered = true;
+            ForeColor = SystemColors.Window;
             Name = "WorkSpace";
             Load += WorkSpace_Load;
             Paint += WorkSpace_Paint;

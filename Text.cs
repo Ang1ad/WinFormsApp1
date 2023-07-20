@@ -21,24 +21,18 @@ namespace WinFormsApp1
             this.parent = parent;
         }
 
-        private Font font;
+        private new readonly Font font;
         private string text = System.String.Empty;
         [NonSerialized()]
-        private Form parent;
+        private readonly Form parent;
 
         public override void Draw(Graphics g)
         {
 
             Rectangle rectangle = Rectangle.FromLTRB(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y), Math.Max(point1.X, point2.X), Math.Max(point1.Y, point2.Y));
-            SolidBrush brush = new SolidBrush(lineColor);
-            /*TextBox textBox = new TextBox();
-            textBox.Font = font;
-            textBox.Width = Math.Abs(point1.X - point2.X);
-            textBox.Height = Math.Abs(point1.Y - point2.Y);
-            textBox.BorderStyle = BorderStyle.None;
-            textBox.Show();*/
-            ToolStripLabel label = new ToolStripLabel();
-            TextDialog textDialog = new TextDialog();
+            SolidBrush brush = new(lineColor);
+            ToolStripLabel label = new();
+            TextDialog textDialog = new();
             DialogResult result = textDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -46,27 +40,29 @@ namespace WinFormsApp1
             }
             label.Width = Math.Abs(point1.X - point2.X);
             label.Height = Math.Abs(point1.Y - point2.Y);
-            Pen pen = new Pen(lineColor, thickness);
+            Pen pen = new(lineColor, thickness);
             g.DrawString(text, font, brush, rectangle);
             g.DrawRectangle(pen, rectangle);
         }
 
         public override void DrawDash(Graphics g)
         {
-            Pen pen = new Pen(dashColor, thickness);
-            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            Pen pen = new(dashColor, thickness)
+            {
+                DashStyle = System.Drawing.Drawing2D.DashStyle.Dash
+            };
             Rectangle rectangle = Rectangle.FromLTRB(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y), Math.Max(point1.X, point2.X), Math.Max(point1.Y, point2.Y));
             g.DrawRectangle(pen, rectangle);
         }
 
         public override void Hide(Graphics g)
         {
-            Pen pen = new Pen(Color.White, thickness);
+            Pen pen = new(Color.White, thickness);
             Rectangle rectangle = Rectangle.FromLTRB(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y), Math.Max(point1.X, point2.X), Math.Max(point1.Y, point2.Y));
             g.DrawRectangle(pen, rectangle);
         }
 
-        public override bool inBorder(Size size)
+        public override bool InBorder(Size size)
         {
             if (
                 point1.X >= 0 && point1.X <= size.Width &&
@@ -76,16 +72,19 @@ namespace WinFormsApp1
                 ) return true;
             return false;
         }
-        public void Click(object sender, KeyEventArgs e)
+        public void Click(object sender, KeyEventArgs e, TextBox? textBox)
         {
-            TextBox textBox = sender as TextBox;
+            textBox = sender as TextBox;
             if (e.KeyCode == Keys.Enter)
             {
+                if (textBox != null) 
+                { 
+                    text = textBox.Text;
+                    textBox.Dispose();
+                }
                 parent.Invalidate();
-                text = textBox.Text;
-                textBox.Dispose();
                 Form1 f = (Form1)parent.ParentForm;
-                f.drawFontType(font, true);
+                f.DrawFontType(font, true);
             }
         }
     }

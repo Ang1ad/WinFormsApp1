@@ -14,24 +14,26 @@ namespace WinFormsApp1
                base(point1, point2, lineColor, dashColor, thickness)   { }
         public override void Draw(Graphics g)
         {
-            Pen pen = new Pen(lineColor, thickness);
+            Pen pen = new(lineColor, thickness);
             g.DrawLine(pen, point1, point2); 
         }
 
         public override void DrawDash(Graphics g)
         {
-            Pen pen = new Pen(dashColor, thickness);
-            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            Pen pen = new(dashColor, thickness)
+            {
+                DashStyle = System.Drawing.Drawing2D.DashStyle.Dash
+            };
             g.DrawLine(pen, point1, point2);
         }
 
         public override void Hide(Graphics g)
         {
-            Pen pen = new Pen(Color.White, thickness);
+            Pen pen = new(Color.White, thickness);
             g.DrawLine (pen, point1, point2);
         }
 
-        public override bool inBorder(Size size)
+        public override bool InBorder(Size size)
         {
             if (
                 point1.X >= 0 && point1.X <= size.Width &&
