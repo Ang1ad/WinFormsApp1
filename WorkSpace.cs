@@ -76,8 +76,8 @@ namespace WinFormsApp1
                     lineColor: ((Form1)ParentForm.ParentForm).paramLineColor,
                     dashColor: ((Form1)ParentForm.ParentForm).paramDashColor,
                     thickness: ((Form1)ParentForm.ParentForm).paramThickness,
-                    font: ((Form1)ParentForm.ParentForm).defaultFont,
-                    parent: ((Form1)ParentForm.ParentForm));
+                    font: ((Form1)ParentForm.ParentForm).font,
+                    parent: (Form1)ParentForm.ParentForm.Parent);
                 }       
             }
         }
@@ -114,6 +114,7 @@ namespace WinFormsApp1
         {
             foreach (Figure f in array)
             {
+                if (((Form1)ParentForm.ParentForm).figureType != Form1.Figures.Text)
                 f.Draw(e.Graphics);
             }
             buffer.Render(e.Graphics);

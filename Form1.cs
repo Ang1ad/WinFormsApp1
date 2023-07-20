@@ -4,6 +4,8 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
@@ -24,7 +26,7 @@ namespace WinFormsApp1
         public Color paramDashColor = Color.Gray;
         public int paramThickness = 1;
         public bool paramIsFill = false;
-        public Font font, defaultFont;
+        public Font font = new("Times New Roman", 12);
 
         public enum Figures
         {
@@ -87,10 +89,14 @@ namespace WinFormsApp1
             bool result = true;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                XmlSerializer xmlSerializer = new(typeof(Stream));
+                //XmlSerializer xmlSerializer = new(typeof(Stream));
                 Stream fileStream = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
                 SaveData saveData = new(f.workSpace.Size, f.workSpace.array);
-                xmlSerializer.Serialize(fileStream, saveData);
+                BinaryWriter binaryWriter = new(fileStream);
+                binaryWriter.BaseStream.Seek(0, SeekOrigin.Begin);
+
+                //XmlWriter xmlWriter = new XmlTextWriter(fileStream, Encoding.Unicode);
+                //xmlSerializer.Serialize(xmlWriter, saveData);
                 f.open = true;
                 f.save = false;
                 f.Text = saveFileDialog1.FileName;

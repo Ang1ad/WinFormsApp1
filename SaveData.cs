@@ -14,6 +14,7 @@ namespace WinFormsApp1
 
         public SaveData(Size size, List<Figure> arrayOfFigures)
         {
+
             this.size = size;
             this.arrayOfFigures = arrayOfFigures;
         }
