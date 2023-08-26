@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.Design;
 
 namespace WinFormsApp1
 {
@@ -10,7 +11,7 @@ namespace WinFormsApp1
     public class Text : Figure
     {
         public Text(Point point1, Point point2, Color lineColor, Color dashColor, int thickness, Font font, Form parent) :
-            base(point1, point2, lineColor, dashColor, thickness, font)
+            base(point1, point2, lineColor, dashColor, thickness, font) //size, multiline
         {
             this.point1 = point1;
             this.point2 = point2;
@@ -21,14 +22,9 @@ namespace WinFormsApp1
             this.parent = parent;
         }
 
-        private new readonly Font font;
-        private string text = System.String.Empty;
-        [NonSerialized()]
-        private readonly Form parent;
-
+        private Form parent;
         public override void Draw(Graphics g)
         {
-
             Rectangle rectangle = Rectangle.FromLTRB(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y), Math.Max(point1.X, point2.X), Math.Max(point1.Y, point2.Y));
             SolidBrush brush = new(lineColor);
             ToolStripLabel label = new();
@@ -41,8 +37,9 @@ namespace WinFormsApp1
             label.Width = Math.Abs(point1.X - point2.X);
             label.Height = Math.Abs(point1.Y - point2.Y);
             Pen pen = new(lineColor, thickness);
-            g.DrawString(text, font, brush, rectangle);
+            g.DrawString(label.Text, font, brush, rectangle);
             g.DrawRectangle(pen, rectangle);
+            g.DrawRectangle(new(Color.White), rectangle);
         }
 
         public override void DrawDash(Graphics g)
@@ -72,7 +69,7 @@ namespace WinFormsApp1
                 ) return true;
             return false;
         }
-        public void Click(object sender, KeyEventArgs e)
+        /*public void Click(object sender, KeyEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
             if (e.KeyCode == Keys.Enter)
@@ -86,6 +83,6 @@ namespace WinFormsApp1
                 Form1 f = (Form1)parent.ParentForm;
                 f.DrawFontType(font, true);
             }
-        }
+        }*/
     }
 }

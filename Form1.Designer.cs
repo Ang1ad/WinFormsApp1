@@ -68,7 +68,7 @@
             toolStripSeparator1 = new ToolStripSeparator();
             SaveFile = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
-            toolStripButton3 = new ToolStripButton();
+            OpenExistingFile = new ToolStripButton();
             toolStripSeparator3 = new ToolStripSeparator();
             Thickness = new ToolStripButton();
             toolStripSeparator4 = new ToolStripSeparator();
@@ -82,9 +82,9 @@
             EllipseStripButton = new ToolStripButton();
             LineStripButton = new ToolStripButton();
             CurveStripButton = new ToolStripButton();
+            TextButton = new ToolStripButton();
             toolStripSeparator8 = new ToolStripSeparator();
             Font = new ToolStripButton();
-            TextButton = new ToolStripButton();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
@@ -155,21 +155,21 @@
             // цветЛинииToolStripMenuItem
             // 
             цветЛинииToolStripMenuItem.Name = "цветЛинииToolStripMenuItem";
-            цветЛинииToolStripMenuItem.Size = new Size(198, 24);
+            цветЛинииToolStripMenuItem.Size = new Size(175, 24);
             цветЛинииToolStripMenuItem.Text = "Цвет линии";
             цветЛинииToolStripMenuItem.Click += ЦветЛинииToolStripMenuItem_Click;
             // 
             // цветЗаливкиToolStripMenuItem
             // 
             цветЗаливкиToolStripMenuItem.Name = "цветЗаливкиToolStripMenuItem";
-            цветЗаливкиToolStripMenuItem.Size = new Size(198, 24);
+            цветЗаливкиToolStripMenuItem.Size = new Size(175, 24);
             цветЗаливкиToolStripMenuItem.Text = "Цвет заливки";
             цветЗаливкиToolStripMenuItem.Click += ЦветЗаливкиToolStripMenuItem_Click;
             // 
             // толщинаЛинииToolStripMenuItem
             // 
             толщинаЛинииToolStripMenuItem.Name = "толщинаЛинииToolStripMenuItem";
-            толщинаЛинииToolStripMenuItem.Size = new Size(198, 24);
+            толщинаЛинииToolStripMenuItem.Size = new Size(175, 24);
             толщинаЛинииToolStripMenuItem.Text = "Толщина линии";
             толщинаЛинииToolStripMenuItem.Click += ТолщинаЛинииToolStripMenuItem_Click;
             // 
@@ -177,7 +177,7 @@
             // 
             режимЗаливкиToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { вклToolStripMenuItem, выклToolStripMenuItem });
             режимЗаливкиToolStripMenuItem.Name = "режимЗаливкиToolStripMenuItem";
-            режимЗаливкиToolStripMenuItem.Size = new Size(198, 24);
+            режимЗаливкиToolStripMenuItem.Size = new Size(175, 24);
             режимЗаливкиToolStripMenuItem.Text = "Режим заливки";
             // 
             // вклToolStripMenuItem
@@ -335,7 +335,7 @@
             // 
             toolStrip1.BackColor = Color.WhiteSmoke;
             toolStrip1.ImageScalingSize = new Size(50, 50);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { NewFile, toolStripSeparator1, SaveFile, toolStripSeparator2, toolStripButton3, toolStripSeparator3, Thickness, toolStripSeparator4, LineColor, toolStripSeparator7, Fill, toolStripSeparator5, Size, toolStripSeparator6, RectangleStripButton, EllipseStripButton, LineStripButton, CurveStripButton, TextButton, toolStripSeparator8, Font });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { NewFile, toolStripSeparator1, SaveFile, toolStripSeparator2, OpenExistingFile, toolStripSeparator3, Thickness, toolStripSeparator4, LineColor, toolStripSeparator7, Fill, toolStripSeparator5, Size, toolStripSeparator6, RectangleStripButton, EllipseStripButton, LineStripButton, CurveStripButton, TextButton, toolStripSeparator8, Font });
             toolStrip1.Location = new Point(0, 25);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1008, 57);
@@ -349,7 +349,7 @@
             NewFile.ImageTransparentColor = Color.Magenta;
             NewFile.Name = "NewFile";
             NewFile.Size = new Size(54, 54);
-            NewFile.Text = "toolStripButton1";
+            NewFile.Text = "New";
             NewFile.Click += ToolStripButton1_Click;
             // 
             // toolStripSeparator1
@@ -364,7 +364,7 @@
             SaveFile.ImageTransparentColor = Color.Magenta;
             SaveFile.Name = "SaveFile";
             SaveFile.Size = new Size(54, 54);
-            SaveFile.Text = "toolStripButton2";
+            SaveFile.Text = "Save";
             SaveFile.Click += ToolStripButton2_Click;
             // 
             // toolStripSeparator2
@@ -372,15 +372,15 @@
             toolStripSeparator2.Name = "toolStripSeparator2";
             toolStripSeparator2.Size = new Size(6, 57);
             // 
-            // toolStripButton3
+            // OpenExistingFile
             // 
-            toolStripButton3.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton3.Image = (Image)resources.GetObject("toolStripButton3.Image");
-            toolStripButton3.ImageTransparentColor = Color.Magenta;
-            toolStripButton3.Name = "toolStripButton3";
-            toolStripButton3.Size = new Size(54, 54);
-            toolStripButton3.Text = "toolStripButton3";
-            toolStripButton3.Click += ToolStripButton3_Click;
+            OpenExistingFile.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            OpenExistingFile.Image = (Image)resources.GetObject("OpenExistingFile.Image");
+            OpenExistingFile.ImageTransparentColor = Color.Magenta;
+            OpenExistingFile.Name = "OpenExistingFile";
+            OpenExistingFile.Size = new Size(54, 54);
+            OpenExistingFile.Text = "Open";
+            OpenExistingFile.Click += ToolStripButton3_Click;
             // 
             // toolStripSeparator3
             // 
@@ -394,7 +394,7 @@
             Thickness.ImageTransparentColor = Color.Magenta;
             Thickness.Name = "Thickness";
             Thickness.Size = new Size(54, 54);
-            Thickness.Text = "toolStripButton4";
+            Thickness.Text = "Thickness";
             Thickness.Click += ToolStripButton4_Click;
             // 
             // toolStripSeparator4
@@ -409,7 +409,7 @@
             LineColor.ImageTransparentColor = Color.Magenta;
             LineColor.Name = "LineColor";
             LineColor.Size = new Size(54, 54);
-            LineColor.Text = "toolStripButton5";
+            LineColor.Text = "Line color";
             LineColor.Click += ToolStripButton5_Click;
             // 
             // toolStripSeparator7
@@ -425,7 +425,7 @@
             Fill.ImageTransparentColor = Color.Magenta;
             Fill.Name = "Fill";
             Fill.Size = new Size(54, 54);
-            Fill.Text = "toolStripButton11";
+            Fill.Text = "Fill";
             Fill.Click += ToolStripButton11_Click;
             // 
             // toolStripSeparator5
@@ -440,7 +440,7 @@
             Size.ImageTransparentColor = Color.Magenta;
             Size.Name = "Size";
             Size.Size = new Size(54, 54);
-            Size.Text = "toolStripButton6";
+            Size.Text = "Size";
             Size.Click += ToolStripButton6_Click;
             // 
             // toolStripSeparator6
@@ -458,7 +458,7 @@
             RectangleStripButton.ImageTransparentColor = Color.Magenta;
             RectangleStripButton.Name = "RectangleStripButton";
             RectangleStripButton.Size = new Size(54, 54);
-            RectangleStripButton.Text = "RectangleStripButton";
+            RectangleStripButton.Text = "Rectangle";
             RectangleStripButton.Click += ToolStripButton7_Click;
             // 
             // EllipseStripButton
@@ -469,7 +469,7 @@
             EllipseStripButton.ImageTransparentColor = Color.Magenta;
             EllipseStripButton.Name = "EllipseStripButton";
             EllipseStripButton.Size = new Size(54, 54);
-            EllipseStripButton.Text = "EllipseStripButton";
+            EllipseStripButton.Text = "Ellipse";
             EllipseStripButton.Click += ToolStripButton8_Click;
             // 
             // LineStripButton
@@ -480,7 +480,7 @@
             LineStripButton.ImageTransparentColor = Color.Magenta;
             LineStripButton.Name = "LineStripButton";
             LineStripButton.Size = new Size(54, 54);
-            LineStripButton.Text = "LineStripButton";
+            LineStripButton.Text = "Line";
             LineStripButton.Click += ToolStripButton9_Click;
             // 
             // CurveStripButton
@@ -491,8 +491,18 @@
             CurveStripButton.ImageTransparentColor = Color.Magenta;
             CurveStripButton.Name = "CurveStripButton";
             CurveStripButton.Size = new Size(54, 54);
-            CurveStripButton.Text = "CurveStripButton";
+            CurveStripButton.Text = "Curve";
             CurveStripButton.Click += ToolStripButton10_Click;
+            // 
+            // TextButton
+            // 
+            TextButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TextButton.Image = (Image)resources.GetObject("TextButton.Image");
+            TextButton.ImageTransparentColor = Color.Magenta;
+            TextButton.Name = "TextButton";
+            TextButton.Size = new Size(54, 54);
+            TextButton.Text = "Text";
+            TextButton.Click += TextButton_Click;
             // 
             // toolStripSeparator8
             // 
@@ -506,18 +516,8 @@
             Font.ImageTransparentColor = Color.Magenta;
             Font.Name = "Font";
             Font.Size = new Size(54, 54);
-            Font.Text = "toolStripButton12";
+            Font.Text = "Font";
             Font.Click += Font_Click;
-            // 
-            // TextButton
-            // 
-            TextButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            TextButton.Image = (Image)resources.GetObject("TextButton.Image");
-            TextButton.ImageTransparentColor = Color.Magenta;
-            TextButton.Name = "TextButton";
-            TextButton.Size = new Size(54, 54);
-            TextButton.Text = "toolStripButton14";
-            TextButton.Click += TextButton_Click;
             // 
             // Form1
             // 
@@ -576,7 +576,7 @@
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripButton SaveFile;
         private ToolStripSeparator toolStripSeparator2;
-        private ToolStripButton toolStripButton3;
+        private ToolStripButton OpenExistingFile;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripButton Thickness;
         private ToolStripSeparator toolStripSeparator4;

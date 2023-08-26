@@ -59,7 +59,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(364, 25);
             textBox1.TabIndex = 2;
-            textBox1.TextChanged += TextBox1_TextChanged;
+            textBox1.KeyDown += TextBox1_KeyDown;
             // 
             // TextDialog
             // 

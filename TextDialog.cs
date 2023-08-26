@@ -17,9 +17,12 @@ namespace WinFormsApp1
             InitializeComponent();
         }
 
-        private void TextBox1_TextChanged(object sender, EventArgs e)
+        private void TextBox1_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if (e.KeyCode == Keys.Enter) 
+            {
+                
+            }
         }
     }
 }
