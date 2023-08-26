@@ -51,7 +51,8 @@ namespace WinFormsApp1
             openFileDialog1.Filter = "JPG(*.JPG)|*.jpg";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                XmlSerializer xmlSerializer = new(typeof(Stream));
+                BinaryFormatter formatter = new();
+                //XmlSerializer xmlSerializer = new(typeof(Stream));
                 Stream fileStream = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
                 Form f = new Form2();
                 ((Form2)f).open = true;
@@ -59,7 +60,7 @@ namespace WinFormsApp1
                 f.Text = openFileDialog1.FileName;
                 if (((Form2)f).array != null)
                 {
-                    ((Form2)f).array = xmlSerializer.Deserialize(fileStream) as List<Figure>;
+                    ((Form2)f).array = formatter.Deserialize(fileStream) as List<Figure>;
                 }
                 f.Show();
                 if (!this.сохранитьКакToolStripMenuItem.Enabled)
@@ -84,8 +85,9 @@ namespace WinFormsApp1
         public void Save(Form2 f)
         {
             Stream fileStream = new FileStream(ActiveMdiChild.Text, FileMode.Create, FileAccess.Write, FileShare.None);
-            XmlSerializer xmlSerializer = new(typeof(Stream));
-            xmlSerializer.Serialize(fileStream, f.array);
+            BinaryFormatter formatter = new();
+            //XmlSerializer xmlSerializer = new(typeof(Stream));
+            formatter.Serialize(fileStream, f.array);
             f.open = true;
             f.save = false;
             fileStream.Close();
@@ -98,9 +100,10 @@ namespace WinFormsApp1
             bool result = true;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                XmlSerializer xmlSerializer = new(typeof(Stream));
+                BinaryFormatter formatter = new();
+                //XmlSerializer xmlSerializer = new(typeof(Stream));
                 Stream fileStream = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
-                xmlSerializer.Serialize(fileStream, f.array);
+                formatter.Serialize(fileStream, f.array);
                 f.open = true;
                 f.save = false;
                 f.Text = saveFileDialog1.FileName;
