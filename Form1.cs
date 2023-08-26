@@ -92,7 +92,6 @@ namespace WinFormsApp1
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 BinaryFormatter formatter = new();
-                //XmlSerializer xmlSerializer = new(typeof(Stream));
                 SaveData saveData = new(f.workSpace.Size, f.workSpace.array);
                 using (var file = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None))
                 {
@@ -100,8 +99,6 @@ namespace WinFormsApp1
                     //xmlSerializer.Serialize(file, saveData);
                 }
                 //Stream fileStream = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
-                //XmlWriter xmlWriter = new XmlTextWriter(fileStream, Encoding.Unicode);
-                //xmlSerializer.Serialize(xmlWriter, saveData);
                 f.open = true;
                 f.save = false;
                 f.Text = saveFileDialog1.FileName;
