@@ -73,10 +73,12 @@ namespace WinFormsApp1
 
         public void Save(Form2 f)
         {
-            XmlSerializer xmlSerializer = new(typeof(Stream));
+            BinaryFormatter formatter = new();
+            //XmlSerializer xmlSerializer = new(typeof(Stream));
             Stream fileStream = new FileStream(ActiveMdiChild.Text, FileMode.Create, FileAccess.Write, FileShare.None);
             SaveData saveData = new(f.workSpace.Size, f.workSpace.array);
-            xmlSerializer.Serialize(fileStream, saveData);
+            formatter.Serialize(fileStream, saveData);
+            //xmlSerializer.Serialize(fileStream, saveData);
             f.open = true;
             f.save = false;
             fileStream.Close();
@@ -89,18 +91,18 @@ namespace WinFormsApp1
             bool result = true;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                //XmlSerializer xmlSerializer = new(typeof(Stream));
-                Stream fileStream = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
+                BinaryFormatter formatter = new();
                 SaveData saveData = new(f.workSpace.Size, f.workSpace.array);
-                BinaryWriter binaryWriter = new(fileStream);
-                binaryWriter.BaseStream.Seek(0, SeekOrigin.Begin);
-
-                //XmlWriter xmlWriter = new XmlTextWriter(fileStream, Encoding.Unicode);
-                //xmlSerializer.Serialize(xmlWriter, saveData);
+                using (var file = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    formatter.Serialize(file, saveData);
+                    //xmlSerializer.Serialize(file, saveData);
+                }
+                //Stream fileStream = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
                 f.open = true;
                 f.save = false;
                 f.Text = saveFileDialog1.FileName;
-                fileStream.Close();
+                //fileStream.Close();
                 result = false;
             }
             return result;
@@ -313,12 +315,12 @@ namespace WinFormsApp1
             openFileDialog1.Filter = "JPG(*.JPG)|*.jpg";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                XmlSerializer xmlSerializer = new(typeof(Stream));
+                BinaryFormatter formatter = new();
+                //XmlSerializer xmlSerializer = new(typeof(Stream));
                 Stream fileStream = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                SaveData? data = xmlSerializer.Deserialize(fileStream) as SaveData;
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                formatter.Deserialize(fileStream);
+                SaveData? data = formatter.Deserialize(fileStream) as SaveData;
                 Form f = new Form2(data.size);
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
                 ((Form2)f).open = true;
                 f.MdiParent = this;
                 f.Text = openFileDialog1.FileName;
