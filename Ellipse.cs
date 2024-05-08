@@ -1,33 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
 
 namespace WinFormsApp1
 {
     [Serializable()]
-    public class MyRectangle : Figure
+    public class Ellipse : MyRectangle
     {
-        public MyRectangle(Point point1, Point point2, Color lineColor, Color fillColor, Color dashColor, int thickness, bool isFill) : 
-            base(point1, point2, lineColor, fillColor, dashColor, thickness, isFill) 
-        {
-            
-        }
+        public Ellipse(Point point1, Point point2, Color lineColor, Color fillColor, Color dashColor, int thickness, bool isFill) :
+            base(point1, point2, lineColor, fillColor, dashColor, thickness, isFill) { }
+
         public override void Draw(Graphics g)
         {
             Pen pen = new(lineColor, thickness);
             Rectangle rectangle = Rectangle.FromLTRB(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y), Math.Max(point1.X, point2.X), Math.Max(point1.Y, point2.Y));
-            if (isFill)
+            if (isFill) 
             {
                 SolidBrush brush = new(fillColor);
-                g.FillRectangle(brush, rectangle);
+                g.FillEllipse(brush, rectangle);
             }
-            g.DrawRectangle(pen, rectangle);
+            g.DrawEllipse(pen, rectangle);
         }
 
         public override void DrawDash(Graphics g)
@@ -37,14 +31,14 @@ namespace WinFormsApp1
                 DashStyle = System.Drawing.Drawing2D.DashStyle.Dash
             };
             Rectangle rectangle = Rectangle.FromLTRB(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y), Math.Max(point1.X, point2.X), Math.Max(point1.Y, point2.Y));
-            g.DrawRectangle(pen, rectangle);
+            g.DrawEllipse(pen, rectangle);
         }
 
         public override void Hide(Graphics g)
         {
             Pen pen = new(Color.White, thickness);
             Rectangle rectangle = Rectangle.FromLTRB(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y), Math.Max(point1.X, point2.X), Math.Max(point1.Y, point2.Y));
-            g.DrawRectangle(pen, rectangle);
+            g.DrawEllipse (pen, rectangle);
         }
 
         public override bool InBorder(Size size)
@@ -56,7 +50,6 @@ namespace WinFormsApp1
                 point2.Y >= 0 && point2.Y <= size.Height
                 ) return true;
             return false;
-        
         }
 
 

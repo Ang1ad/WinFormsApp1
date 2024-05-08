@@ -18,83 +18,51 @@ namespace WinFormsApp1
 {
     public partial class Form2 : Form
     {
-        public bool draw = false;
-        public bool save = false;
-        public bool open = false;
-        public List<Figure> array = new List<Figure>();
-        private Graphics g;
-        private MyRectangle rectangle;
-        private Point point1;
-        private Point point2;
-        public Form2()
+
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        public Form2(Size size)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             InitializeComponent();
+            ClientSize = size;
+            AutoScrollMinSize = size;
+            workSpace = new WorkSpace(size);
+            Controls.Clear();
+            Controls.Add(workSpace);
         }
 
-        private void Form2_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                draw = true;
-                g = CreateGraphics();
-                point1 = new Point(e.X, e.Y);
-                point2 = new Point(e.X, e.Y);
-                rectangle = new MyRectangle(point1, point2);
-            }
-        }
 
-        private void Form2_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (draw)
-            {
-                rectangle.Hide(g);
-                point2 = new Point(e.X, e.Y);
-                rectangle = new MyRectangle(point1, point2);
-                rectangle.DrawDash(g);
-            }
-        }
+        public bool save = false;
+        public bool open = false;
 
-        private void Form2_Paint(object sender, PaintEventArgs e)
-        {
-            foreach (Figure f in array)
-            {
-                f.Draw(g);
-            }
-        }
-
-        private void Form2_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (draw && e.Button == MouseButtons.Left)
-            {
-                rectangle = new MyRectangle(point1, point2);
-                rectangle.Draw(g);
-                array.Add(rectangle);
-                Invalidate();
-
-                if (!save)
-                {
-                    if (open) ((Form1)ParentForm).сохранитьToolStripMenuItem.Enabled = true;
-                    save = true;
-                }
-            }
-            draw = false;
-        }
+        public MyRectangle rectangle;
+        public WorkSpace workSpace;
 
         private void Form2_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void FormClose(object sender, FormClosingEventArgs e)
+        private void FormActivate(object sender, EventArgs e)
+        {
+            ((Form1)ParentForm).сохранитьToolStripMenuItem.Enabled = open && save;
+            ((Form1)ParentForm).сохранитьКакToolStripMenuItem.Enabled = true;
+            ((Form1)ParentForm).ChangeDocSizeValue(this);
+        }
+
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (save)
             {
-                DialogResult dr = MessageBox.Show("Сохранить изменения?", "", MessageBoxButtons.YesNoCancel);
+                DialogResult dr = MessageBox.Show("Сохранить изменения?", ((Form1)ParentForm).ActiveMdiChild.Text.ToString(), MessageBoxButtons.YesNoCancel);
 
                 if (dr == DialogResult.Yes)
                 {
                     if (open) ((Form1)ParentForm).Save(this);
                     else e.Cancel = ((Form1)ParentForm).SaveAs(this);
+                    workSpace.buffer.Dispose();
+                    workSpace.bufferContext.Dispose();
+                    workSpace.g.Dispose();
                 }
                 else if (dr == DialogResult.Cancel) e.Cancel = true;
             }
@@ -103,12 +71,6 @@ namespace WinFormsApp1
                 ((Form1)ParentForm).сохранитьToolStripMenuItem.Enabled = false;
                 ((Form1)ParentForm).сохранитьКакToolStripMenuItem.Enabled = false;
             }
-        }
-
-        private void FormActivate(object sender, EventArgs e)
-        {
-            ((Form1)ParentForm).сохранитьToolStripMenuItem.Enabled = open && save;
-            ((Form1)ParentForm).сохранитьКакToolStripMenuItem.Enabled = true;
         }
     }
 }

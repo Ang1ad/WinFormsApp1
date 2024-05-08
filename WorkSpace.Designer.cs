@@ -1,13 +1,13 @@
 ﻿namespace WinFormsApp1
 {
-    partial class Form2
+    partial class WorkSpace
     {
-        /// <summary>
+        /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -20,28 +20,28 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Component Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             SuspendLayout();
             // 
-            // Form2
+            // WorkSpace
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoScroll = true;
-            BackColor = Color.DarkGray;
-            ClientSize = new Size(784, 559);
-            Name = "Form2";
-            Text = "Form2";
-            Activated += FormActivate;
-            FormClosing += Form2_FormClosing;
-            Load += Form2_Load;
+            DoubleBuffered = true;
+            ForeColor = SystemColors.Window;
+            Name = "WorkSpace";
+            Load += WorkSpace_Load;
+            Paint += WorkSpace_Paint;
+            MouseDown += WorkSpace_MouseDown;
+            MouseMove += WorkSpace_MouseMove;
+            MouseUp += WorkSpace_MouseUp;
             ResumeLayout(false);
         }
 

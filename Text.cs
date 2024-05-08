@@ -1,33 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
+using System.Windows.Forms.Design;
 
 namespace WinFormsApp1
 {
     [Serializable()]
-    public class MyRectangle : Figure
+    public class Text : Figure
     {
-        public MyRectangle(Point point1, Point point2, Color lineColor, Color fillColor, Color dashColor, int thickness, bool isFill) : 
-            base(point1, point2, lineColor, fillColor, dashColor, thickness, isFill) 
+        public Text(Point point1, Point point2, Color lineColor, Color dashColor, int thickness, Font font, Form parent) :
+            base(point1, point2, lineColor, dashColor, thickness, font) //size, multiline
         {
-            
+            this.point1 = point1;
+            this.point2 = point2;
+            this.lineColor = lineColor;
+            this.dashColor = dashColor;
+            this.thickness = thickness;
+            this.font = font;
+            this.parent = parent;
         }
+
+        private Form parent;
         public override void Draw(Graphics g)
         {
-            Pen pen = new(lineColor, thickness);
             Rectangle rectangle = Rectangle.FromLTRB(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y), Math.Max(point1.X, point2.X), Math.Max(point1.Y, point2.Y));
-            if (isFill)
+            SolidBrush brush = new(lineColor);
+            ToolStripLabel label = new();
+            TextDialog textDialog = new();
+            DialogResult result = textDialog.ShowDialog();
+            if (result == DialogResult.OK)
             {
-                SolidBrush brush = new(fillColor);
-                g.FillRectangle(brush, rectangle);
+                label.Text = textDialog.textBox1.Text;
             }
+            label.Width = Math.Abs(point1.X - point2.X);
+            label.Height = Math.Abs(point1.Y - point2.Y);
+            Pen pen = new(lineColor, thickness);
+            g.DrawString(label.Text, font, brush, rectangle);
             g.DrawRectangle(pen, rectangle);
+            g.DrawRectangle(new(Color.White), rectangle);
         }
 
         public override void DrawDash(Graphics g)
@@ -56,9 +68,21 @@ namespace WinFormsApp1
                 point2.Y >= 0 && point2.Y <= size.Height
                 ) return true;
             return false;
-        
         }
-
-
+        /*public void Click(object sender, KeyEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (textBox != null) 
+                { 
+                    text = textBox.Text;
+                    textBox.Dispose();
+                }
+                parent.Invalidate();
+                Form1 f = (Form1)parent.ParentForm;
+                f.DrawFontType(font, true);
+            }
+        }*/
     }
 }
